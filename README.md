@@ -1,14 +1,14 @@
-## PPCA-worldwide-protocol
+# PPCA-worldwide-protocol
  Population Potential on Catchment Area - Worldwide Protocol
 
 This repository is part of the emc2 research project.
 [emc2 project](https://emc2-dut.org/)  
 [ESPACE laboratory](https://www.umrespace.org/)
 
-# Global objectives :
+## Global objectives :
 
 
-# Project sections
+## Project sections
 - **1.0 Data Automated Download - GHS and OSM**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 This script acquires and processes spatial data using Google Earth Engine, OpenStreetMap, and QGIS tools. It downloads GHS raster data (population estimate), OSM data (roads, buildings and land cover) and converts it to vector format, and saves it in a GeoPackage.
 
