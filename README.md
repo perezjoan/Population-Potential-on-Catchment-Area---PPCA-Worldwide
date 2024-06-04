@@ -49,3 +49,15 @@ _Guide to run the script:_
 - Put the output of step 1. (GHS raster) in your working directory
 
 **2.0 Filter on Downloaded Data**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+
+
+_Description:_
+
+xxxx
+
+_Requirements:_
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
+- Geopackage with OSM and GHS data (output from 1.0)
+
+_Guide to run the script:_
+- Fill box 0.2 within the code 
