@@ -22,7 +22,14 @@ _5.0 Population to Catchment Areas:_ Maps the estimated population data to the d
 ## Project sections
 **1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 _Description:_
-This script acquires and processes spatial data using Google Earth Engine, OpenStreetMap, and QGIS tools. It downloads GHS raster data (population estimate), OSM data (roads, buildings and land cover) and converts it to vector format, and saves it in a GeoPackage.
+This script facilitates the acquisition of spatial data using a combination of Google Earth Engine, OpenStreetMap, and QGIS tools. 
+It starts by authenticating and initializing Earth Engine and downloading Global Human Settlement (GHS) raster data for a specified year. 
+The GHS data is then exported as a raster image for a defined geographical area. Once downloaded, the raster data is converted to vector data using
+QGIS and saved in a local GeoPackage. The script proceeds to extract building data within the same geographical area from OpenStreetMap, cleans the
+data by removing any list-type columns, and saves the cleaned data into the GeoPackage. Additionally, the script extracts street data from 
+OpenStreetMap, converting it into a GeoDataFrame format and filtering it to separate pedestrian streets from primary roads. Both sets of street data
+are visualized and saved in the GeoPackage. The result is a set of spatial data layers, including GHS population data, building footprints, and 
+street layers.
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
