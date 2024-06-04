@@ -20,7 +20,7 @@ _4.0 Population Evaluation:_ Estimates the population within the evaluated build
 _5.0 Population to Catchment Areas:_ Maps the estimated population data to the defined catchment areas. (WORK UNDER PROGRESS)\
 
 ## Project sections
-- **1.0 Data Automated Download - GHS and OSM**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 This script acquires and processes spatial data using Google Earth Engine, OpenStreetMap, and QGIS tools. It downloads GHS raster data (population estimate), OSM data (roads, buildings and land cover) and converts it to vector format, and saves it in a GeoPackage.
 
 _Requirements:_
@@ -31,4 +31,4 @@ _Guide to run the script:_
 - Fill box within the code 
 - Put the output of step 1. (GHS raster) in your working directory
 
-- **2.0 Filter on Downloaded Data**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**2.0 Filter on Downloaded Data**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
