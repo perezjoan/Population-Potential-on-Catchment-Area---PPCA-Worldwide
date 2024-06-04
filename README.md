@@ -13,11 +13,11 @@ The protocol is designed to work globally; you only need to provide the coordina
 
 The code is written in Python, and each script requires a specific environment. The environments are detailed below, with links to text files containing the necessary conda commands (e.g., conda create, conda install, etc.).
 
-_1.0 Data Download:_ This script connects to OSM and Google Earth Engine to automatically downloads OSM and GHS data based on provided coordinates. 
-_2.0 Data Filtering:_ Filters the downloaded data, categorizing roads into pedestrian and non-pedestrian, and buildings into residential and non-residential, among other classifications.
-_3.0 Machine Learning:_ Uses machine learning to evaluate and classify buildings as residential or non-residential. (WORK UNDER PROGRESS)
-_4.0 Population Evaluation:_ Estimates the population within the evaluated buildings. (WORK UNDER PROGRESS)
-_5.0 Population to Catchment Areas:_ Maps the estimated population data to the defined catchment areas. (WORK UNDER PROGRESS)
+_1.0 Data Download:_ This script connects to OSM and Google Earth Engine to automatically downloads OSM and GHS data based on provided coordinates.\
+_2.0 Data Filtering:_ Filters the downloaded data, categorizing roads into pedestrian and non-pedestrian, and buildings into residential and non-residential, among other classifications.\
+_3.0 Machine Learning:_ Uses machine learning to evaluate and classify buildings as residential or non-residential. (WORK UNDER PROGRESS)\
+_4.0 Population Evaluation:_ Estimates the population within the evaluated buildings. (WORK UNDER PROGRESS)\
+_5.0 Population to Catchment Areas:_ Maps the estimated population data to the defined catchment areas. (WORK UNDER PROGRESS)\
 
 ## Project sections
 - **1.0 Data Automated Download - GHS and OSM**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
