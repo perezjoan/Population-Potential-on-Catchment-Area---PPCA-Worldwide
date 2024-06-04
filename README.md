@@ -23,8 +23,8 @@ _5.0 Population to Catchment Areas:_ Maps the estimated population data to the d
 
 Follow these steps to run the Python algorithms :
 - Install the Anaconda distribution of Python [Link](https://www.anaconda.com/download)
-- Navigate to a section and create a specific environment (settings of envionments detailed in each section)
-- Active the created environment and run the Python scripts
+- Navigate to the relevant section and create a specific environment (detailed environment settings are provided in each section).
+- Activate an environment and run the related Python scripts
 
 ## Project sections
 **1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
