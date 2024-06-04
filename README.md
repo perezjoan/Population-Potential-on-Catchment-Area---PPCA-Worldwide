@@ -9,7 +9,7 @@ This repository is part of the emc2 research project.
 
 This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. For more information about the EMC2 project, visit EMC2 Research Project.
 
-The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest.
+The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt)
 
 The code is written in Python, and each script requires a specific environment. The environments are detailed below, with links to text files containing the necessary conda commands (e.g., conda create, conda install, etc.).
 
