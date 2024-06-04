@@ -22,7 +22,7 @@ _5.0 Population to Catchment Areas:_ Maps the estimated population data to the d
 ## Project sections
 **1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)\
 
-_Description:_\
+_Description:_
 
 This script facilitates the acquisition of spatial data using a combination of Google Earth Engine, OpenStreetMap, and QGIS tools. 
 It starts by authenticating and initializing Earth Engine and downloading Global Human Settlement (GHS) raster data for a specified year. 
