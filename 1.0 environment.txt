@@ -1,0 +1,6 @@
+conda create -n PPCA_EMC2
+conda activate PPCA_EMC2
+conda install jupyter
+conda install -c conda-forge earthengine-api
+conda install -c conda-forge --strict-channel-priority osmnx
+conda install -c conda-forge qgis
