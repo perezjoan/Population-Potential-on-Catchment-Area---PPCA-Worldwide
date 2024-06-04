@@ -20,7 +20,7 @@ _4.0 Population Evaluation:_ Estimates the population within the evaluated build
 _5.0 Population to Catchment Areas:_ Maps the estimated population data to the defined catchment areas. (WORK UNDER PROGRESS)\
 
 ## Project sections
-**1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)\
+**1.0 Data Download**- Automated download of GHS and OSM data: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -35,7 +35,7 @@ street layers.
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
-- Authentication on google earth engine [Link EE engine Authentication](https://code.earthengine.google.com/)
+- Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
 
 _Guide to run the script:_
 - Fill box 0.2 within the code 
