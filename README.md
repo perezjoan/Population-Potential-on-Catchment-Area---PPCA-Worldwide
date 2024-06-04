@@ -7,7 +7,7 @@ This repository is part of the emc2 research project.
 
 ## Global objectives :
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the EMC2 research project. The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. For more information about the EMC2 project, visit EMC2 Research Project.
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. For more information about the EMC2 project, visit EMC2 Research Project.
 
 The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest.
 
@@ -22,7 +22,7 @@ _5.0 Population to Catchment Areas:_ Maps the estimated population data to the d
 ## Installation Steps
 
 Follow these steps to run the Python algorithms :
-- Install the Anaconda distribution of Python [Link](https://www.anaconda.com/download)
+- Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
 - Navigate to the relevant section and create a specific environment (detailed environment settings are provided in each section).
 - Activate an environment and run the related Python scripts
 
