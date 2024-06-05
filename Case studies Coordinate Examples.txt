@@ -1,17 +1,17 @@
-Drap (South of France) - small case study / EPSG:2154
-xMin = 7.30
-xMax = 7.35
-yMin = 43.73
-yMax = 43.77
-
-Nice (South of France) - large case study / EPSG:2154
+Nice (South of France) - EPSG:2154
 xMin = 7.23
 xMax = 7.31
 yMin = 43.68
 yMax = 43.73
 
-Goteborg (Sweden) - large case study  / EPSG:3152
+Goteborg (Sweden) - EPSG:3152
 xMin = 11.92
 xMax = 12.03
 yMin = 57.66
 yMax = 57.74
+
+Wien (Austria) - EPSG:8881
+xMin = 48.18
+xMax = 48.22
+yMin = 16.30
+yMax = 16.42
