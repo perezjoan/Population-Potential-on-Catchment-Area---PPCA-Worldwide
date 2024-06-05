@@ -11,7 +11,7 @@ yMin = 57.66
 yMax = 57.74
 
 Wien (Austria) - EPSG:8881
-xMin = 48.18
-xMax = 48.22
-yMin = 16.30
-yMax = 16.42
+xMin = 16.30
+xMax = 16.42
+yMin = 48.18
+yMax = 48.22
