@@ -1,0 +1,11 @@
+Environment settings for PPCA 2.0 Data filter / Residential & Non-residential Buildings Classification based on Attribute values
+
+Open to Anaconda Prompt and run the following commands
+conda create -n PPCA2
+conda activate PPCA2
+conda install jupyter
+conda install pandas
+conda install geopandas
+jupyter notebook
+
+In jupyter home, open and run PPCA 2.0
