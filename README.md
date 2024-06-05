@@ -27,7 +27,7 @@ Follow these steps to run the Python algorithms :
 - Activate an environment and run the related Python scripts
 
 ## Project sections
-**PPCA 1.0 Data download :** - GHS and OSM data acquisition. [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**PPCA 1.0 Data download : GHS and OSM data acquisition** [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -55,14 +55,14 @@ _Description:_
 
 The script processes and filter spatial data from OSM and GHS sources for further analysis. It performs four main tasks: (1) It reads and filters 
 Global Human Settlement (GHS) data by rounding values and removing meshes with zero population (2) It filters OpenStreetMap (OSM) streets data to 
-separate pedestrian and non-pedestrian streets (3) It filters OSM land use data to identify non-populated areas (4) It classifies building types 
-from OSM building data into three categories (# 0 : NA ; 1 : residential or mixed-use ; 2 : non-residential) based on their attributes and spatial 
-relationships with non-populated land use areas, adjusting the classification with additional criteria, and finally saves the updated classification
-data in a column named 'type'.
+separate pedestrian and non-pedestrian streets (3) It filters OSM land use data to identify non-populated areas.
 
 _Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
 - Geopackage file from PPCA 1.0
 
 _Guide to run the script:_
 - Fill 0.2 box within the script
+
+**PPCA 3.0 Morphometry on Buildings**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+
