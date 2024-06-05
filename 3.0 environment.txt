@@ -1,0 +1,12 @@
+Environment settings for PPCA 3.0 Morphometry on buildings
+
+Open to Anaconda Prompt and run the following commands
+conda create -n PPCA3
+conda activate PPCA3
+conda install jupyter
+conda install pandas
+conda install geopandas
+conda install -c conda-forge momepy
+jupyter notebook
+
+In jupyter home, open and run PPCA 3.0
