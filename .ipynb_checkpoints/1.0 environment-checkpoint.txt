@@ -1,0 +1,12 @@
+Environment settings for PPCA 1.0 Data download : : GHS and OSM data acquisition
+
+Open to Anaconda Prompt and run the following commands
+conda create -n PPCA1
+conda activate PPCA1
+conda install jupyter
+conda install -c conda-forge earthengine-api
+conda install -c conda-forge --strict-channel-priority osmnx
+conda install -c conda-forge qgis
+jupyter notebook
+
+In jupyter home, open and run 1.0 Data download
