@@ -7,7 +7,7 @@ This repository is part of the emc2 research project.
 
 ## Global objectives :
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. For more information about the EMC2 project, visit EMC2 Research Project.
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques.
 
 The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt)
 
@@ -15,9 +15,7 @@ The code is written in Python, and each script requires a specific environment. 
 
 _1.0 Data Download:_ This script connects to OSM and Google Earth Engine to automatically downloads OSM and GHS data based on provided coordinates.\
 _2.0 Data Filtering:_ Filters the downloaded data, categorizing roads into pedestrian and non-pedestrian, and buildings into residential and non-residential, among other classifications.\
-_3.0 Machine Learning:_ Uses machine learning to evaluate and classify buildings as residential or non-residential. (WORK UNDER PROGRESS)\
-_4.0 Population Evaluation:_ Estimates the population within the evaluated buildings. (WORK UNDER PROGRESS)\
-_5.0 Population to Catchment Areas:_ Maps the estimated population data to the defined catchment areas. (WORK UNDER PROGRESS)\
+(3+) Under progress
 
 ## Installation Steps
 
