@@ -1,4 +1,5 @@
 Environment settings for PPCA 3.0 Morphometry on buildings
+& PPCA 4.0 Residential & non-residential buildings : classification based on attributes
 
 Open to Anaconda Prompt and run the following commands
 conda create -n PPCA3
@@ -10,3 +11,4 @@ conda install -c conda-forge momepy
 jupyter notebook
 
 In jupyter home, open and run "3.0 morphometry + height.ipynb"
+or "4.0 Residential classification based on attributes.ipynb"
