@@ -45,9 +45,16 @@ _Requirements:_
 _Guide to run the script:_
 - Fill box 0.2 within the code 
 - Put the output of step 1. (GHS raster) in your working directory
+- 
+_Outputs :_
+- A raster file with the GHS population data
+- A geopackage file with 4 layers :
+    * 'ghs_{date}_vector'(Polygon),  GHS population data at a given date
+    * 'osm_all_area_categories ' (Polygon), OSM land use data with non-populated areas
+    * 'osm_all_buildings' (Polygon), OSM all buildings
+    * 'osm_all_streets' (LineString), OSM all streets
 
 **PPCA 2.0 Data filter / Residential & Non-residential Buildings Classification based on Attribute values**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
-
 
 _Description:_
 
@@ -57,10 +64,38 @@ separate pedestrian and non-pedestrian streets (3) It filters OSM land use data 
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
-- Geopackage file from PPCA 1.0
+- Output file from PPCA 1.0 (Geopackage)
 
 _Guide to run the script:_
 - Fill 0.2 box within the script
 
+_Outputs :_
+- A geopackage file with 4 layers :
+    * 'ghs_populated_2020_vector'(Polygon),  GHS population data with non null values
+    * 'osm_non_populated_areas ' (Polygon), OSM land use data with non-populated areas
+    * 'pedestrian_streets' (LineString), OSM pedestrian streets
+    * 'non_pedestrian_streets' (LineString), OSM non-pedestrian streets
+
 **PPCA 3.0 Morphometry on Buildings**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+
+_Description:_
+
+This script performs several calculations and transformations on a layer of OSM buildings. It begins by ensuring the columns 'height' and 'building
+are numeric, converting any non-numeric entries to NaN. The script then fills missing 'height' values by multiplying floors by 3, assuming an 
+average floor height of 3 meters. Conversely, it fills missing building values by dividing 'height' by 3 and rounding the result. It calculates and
+prints the number and percentage of rows with NaN in both 'height' and 'building. Several new columns are computed: 'FL' for the number of floors,
+'A' for the surface area, 'P' for the perimeter, 'E' for elongation, 'C' for convexity, 'FA' for floor area, 'ECA' for a product involving 
+elongation, convexity, and area, 'EA' for another elongation-area product, and 'SW' for shared walls ratio. Finally, the script renames 
+'building:floors' to 'FL'.
+
+_Requirements:_
+- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
+- Output file from PPCA 1.0 (Geopackage)
+
+_Guide to run the script:_
+- Fill 0.2 box
+
+_Output :_
+- A geopackage file with a single layer
+    * 'osm_all_buildings_ind' (Polygon), osm buildings with height/floor values completed and with morphometric indicators
 
