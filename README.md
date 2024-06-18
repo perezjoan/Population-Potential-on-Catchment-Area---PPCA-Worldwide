@@ -64,7 +64,7 @@ separate pedestrian and non-pedestrian streets (3) It filters OSM land use data 
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
-- Geopackage file from PPCA 1.0
+- Output file from PPCA 1.0 (Geopackage)
 
 _Guide to run the script:_
 - Fill 0.2 box within the script
