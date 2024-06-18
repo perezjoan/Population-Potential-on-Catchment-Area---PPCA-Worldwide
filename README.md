@@ -45,7 +45,7 @@ _Requirements:_
 _Guide to run the script:_
 - Fill box 0.2 within the code 
 - Put the output of step 1. (GHS raster) in your working directory
-- 
+  
 _Outputs :_
 - A raster file with the GHS population data
 - A geopackage file with 4 layers :
@@ -113,7 +113,7 @@ OSM land use areas. Final score of classified buildings vs buldings with null va
 
 _Requirements:_
 - A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
-- Output file from PPCA 1.0 ('osm_all_buildings' (Polygon), OSM all buildings)
+- Output file from PPCA 3.0 ('osm_all_buildings_ind' (Polygon), OSM all buildings)
 - Output file from PPCA 2.0 ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
 
 _Guide to run the script:_
