@@ -7,15 +7,7 @@ This repository is part of the emc2 research project.
 
 ## Global objectives :
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques.
-
-The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt)
-
-The code is written in Python, and each script requires a specific environment. The environments are detailed below, with links to text files containing the necessary conda commands (e.g., conda create, conda install, etc.).
-
-_1.0 Data Download:_ This script connects to OSM and Google Earth Engine to automatically downloads OSM and GHS data based on provided coordinates.\
-_2.0 Data Filtering:_ Filters the downloaded data, categorizing roads into pedestrian and non-pedestrian, and buildings into residential and non-residential, among other classifications.\
-(3+) Under progress
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt) The code is written in Python, and each script requires a specific environment. The environments are detailed below, with links to text files containing the necessary conda commands (e.g., conda create, conda install, etc.).
 
 ## Installation Steps
 
@@ -45,7 +37,7 @@ _Requirements:_
 _Guide to run the script:_
 - Fill box 0.2 within the code 
 - Put the output of step 1. (GHS raster) in your working directory
-- 
+  
 _Outputs :_
 - A raster file with the GHS population data
 - A geopackage file with 4 layers :
@@ -64,7 +56,8 @@ separate pedestrian and non-pedestrian streets (3) It filters OSM land use data 
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
-- Output file from PPCA 1.0 (Geopackage)
+- Output file from PPCA 1.0 ('ghs_{date}_vector'(Polygon),  GHS population data at a given date ; 'osm_all_area_categories ' (Polygon), OSM land use
+data with non-populated areas ; 'osm_all_streets' (LineString), OSM all streets)
 
 _Guide to run the script:_
 - Fill 0.2 box within the script
@@ -76,7 +69,7 @@ _Outputs :_
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
     * 'non_pedestrian_streets' (LineString), OSM non-pedestrian streets
 
-**PPCA 3.0 Morphometry on Buildings**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**PPCA 3.0 Morphometry on Buildings**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
 
 _Description:_
 
@@ -89,8 +82,8 @@ elongation, convexity, and area, 'EA' for another elongation-area product, and '
 'building:floors' to 'FL'.
 
 _Requirements:_
-- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
-- Output file from PPCA 1.0 (Geopackage)
+- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- Output file from PPCA 1.0 ('osm_all_buildings' (Polygon), OSM all buildings)
 
 _Guide to run the script:_
 - Fill 0.2 box
@@ -98,4 +91,26 @@ _Guide to run the script:_
 _Output :_
 - A geopackage file with a single layer
     * 'osm_all_buildings_ind' (Polygon), osm buildings with height/floor values completed and with morphometric indicators
+ 
+**PPCA 4.0 Residential & non-residential buildings : classification based on attributes**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
 
+_Description:_
+
+This script filter out buildings with a footprint area less than 15 m² and optionally filters out buildings that have no walls, if the 'wall' column
+exists. It then create a column 'type' within the OSM building data with three possible values (# 0 : NA ; 1 : residential or mixed-use ; 
+2 : non-residential). Values are filled using the OSM attributes 'building_type' : apartments', 'barracks', 'house', 'residential', 'bungalow', 
+'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house' & 'stilt_house' are considered as residential or mixed-use 
+buildings. Finally, the classification is refined by attributing 0 values to null values based on the spatial relationships with non-populated 
+OSM land use areas. Final score of classified buildings vs buldings with null values are printed and mapped.
+
+_Requirements:_
+- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- Output file from PPCA 3.0 ('osm_all_buildings_ind' (Polygon), OSM all buildings)
+- Output file from PPCA 2.0 ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
+
+_Guide to run the script:_
+- Fill 0.2 box
+
+Output :
+- A geopackage file with a single layer
+    * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
