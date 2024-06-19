@@ -114,3 +114,26 @@ _Guide to run the script:_
 Output :
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
+
+**PPCA 5.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Residential%20classification%20fill%20null%20with%20machine%20learning.ipynb)
+
+_Description:_
+
+This script trains and evaluates a Decision Tree Classifier on OSM building data. Initially, it splits the dataset into training and testing subsets 
+based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on the test set. Subsequently,
+it applies the trained model to predict missing 'type' values on the OSM building data with missing values for 'type'. Within the output, a new 
+variabme containing named 'type_filled' is created with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes
+the value of the OSM 'type' varaible for non null values, and the model prediction for null values. The script also visualizes the decision tree, 
+map the results and examines how the classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function
+of the training data size.
+
+_Requirements:_
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- Output file from PPCA 4.0 ('osm_all_buildings_res_type_with_null' (Polygon), OSM all buildings)
+
+_Guide to run the script:_
+- Fill 0.2 box
+
+_Output :_
+- A geopackage file with a single layer :
+    * 'osm_all_buildings_res_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
