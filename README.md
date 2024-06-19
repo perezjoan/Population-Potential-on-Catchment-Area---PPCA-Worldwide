@@ -152,4 +152,4 @@ _Output :_
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
 
 ## License
-The emc2 project is licensed under the [Attribution-ShareAlike 4.0 International]. See the [LICENSE](https://github.com/perezjoan/CDPC---ICCSA-2024-Protocol?tab=CC-BY-SA-4.0-1-ov-file) file for details.
+The emc2 project is licensed under the [Attribution-ShareAlike 4.0 International]. See the [LICENSE](https://github.com/perezjoan/PPCA-codes?tab=CC-BY-SA-4.0-1-ov-file) file for details.
