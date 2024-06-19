@@ -13,7 +13,7 @@ This repository contains the implementation of the PPCA (Population Potential on
 
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
-- Navigate to the relevant section and create a specific environment (detailed environment settings are provided in each section).
+- Navigate to the relevant section and create a specific environment (detailed environment settings are provided in [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
 - Activate an environment and run the related Python scripts
 
 ## Project sections
