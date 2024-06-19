@@ -144,6 +144,10 @@ _Output :_
 - A geopackage file with a single layer :
     * 'osm_all_buildings_res_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
 
+**PPCA 6.0 : Population potential estimation per building** _Work in progress_
+
+**PPCA 7.0 : Population potential estimation per catchment areas** _Work in progress_
+
 ## Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
 
