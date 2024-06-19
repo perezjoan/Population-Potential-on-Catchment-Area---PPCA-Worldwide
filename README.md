@@ -31,7 +31,7 @@ are visualized and saved in the GeoPackage. The result is a set of spatial data 
 street layers.
 
 _Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
 
 _Guide to run the script:_
@@ -55,7 +55,7 @@ Global Human Settlement (GHS) data by rounding values and removing meshes with z
 separate pedestrian and non-pedestrian streets (3) It filters OSM land use data to identify non-populated areas.
 
 _Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 1.0 ('ghs_{date}_vector'(Polygon),  GHS population data at a given date ; 'osm_all_area_categories ' (Polygon), OSM land use
 data with non-populated areas ; 'osm_all_streets' (LineString), OSM all streets)
 
@@ -82,7 +82,7 @@ elongation, convexity, and area, 'EA' for another elongation-area product, and '
 'building:floors' to 'FL'.
 
 _Requirements:_
-- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 1.0 ('osm_all_buildings' (Polygon), OSM all buildings)
 
 _Guide to run the script:_
@@ -104,7 +104,7 @@ buildings. Finally, the classification is refined by attributing 0 values to nul
 OSM land use areas. Final score of classified buildings vs buldings with null values are printed and mapped.
 
 _Requirements:_
-- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 3.0 ('osm_all_buildings_ind' (Polygon), OSM all buildings)
 - Output file from PPCA 2.0 ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
 
