@@ -52,7 +52,7 @@ _Outputs :_
     * 'osm_all_buildings' (Polygon), OSM all buildings
     * 'osm_all_streets' (LineString), OSM all streets
 
-**PPCA 2.0 Data filter / Residential & Non-residential Buildings Classification based on Attribute values**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**PPCA 2.0 : Data filter / Preparation**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
