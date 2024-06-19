@@ -13,7 +13,7 @@ This repository contains the implementation of the PPCA (Population Potential on
 
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
-- Navigate to the relevant section and create a specific environment (detailed environment settings are provided in each section).
+- Navigate to the relevant section and create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
 - Activate an environment and run the related Python scripts
 
 ## Project sections
@@ -31,12 +31,12 @@ are visualized and saved in the GeoPackage. The result is a set of spatial data 
 street layers.
 
 _Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20environment.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
 
 _Guide to run the script:_
 - Fill box 0.2 within the code 
-- Put the output of step 1. (GHS raster) in your working directory
+- Put the output of step 1. in your working directory before running step 2.
   
 _Outputs :_
 - A raster file with the GHS population data
@@ -55,7 +55,7 @@ Global Human Settlement (GHS) data by rounding values and removing meshes with z
 separate pedestrian and non-pedestrian streets (3) It filters OSM land use data to identify non-populated areas.
 
 _Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20environment.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 1.0 ('ghs_{date}_vector'(Polygon),  GHS population data at a given date ; 'osm_all_area_categories ' (Polygon), OSM land use
 data with non-populated areas ; 'osm_all_streets' (LineString), OSM all streets)
 
@@ -82,7 +82,7 @@ elongation, convexity, and area, 'EA' for another elongation-area product, and '
 'building:floors' to 'FL'.
 
 _Requirements:_
-- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 1.0 ('osm_all_buildings' (Polygon), OSM all buildings)
 
 _Guide to run the script:_
@@ -104,7 +104,7 @@ buildings. Finally, the classification is refined by attributing 0 values to nul
 OSM land use areas. Final score of classified buildings vs buldings with null values are printed and mapped.
 
 _Requirements:_
-- A specific working environment [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20%26%204.0%20README.txt)
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA 3.0 ('osm_all_buildings_ind' (Polygon), OSM all buildings)
 - Output file from PPCA 2.0 ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
 
@@ -114,3 +114,26 @@ _Guide to run the script:_
 Output :
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
+
+**PPCA 5.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Residential%20classification%20fill%20null%20with%20machine%20learning.ipynb)
+
+_Description:_
+
+This script trains and evaluates a Decision Tree Classifier on OSM building data. Initially, it splits the dataset into training and testing subsets 
+based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on the test set. Subsequently,
+it applies the trained model to predict missing 'type' values on the OSM building data with missing values for 'type'. Within the output, a new 
+variabme containing named 'type_filled' is created with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes
+the value of the OSM 'type' varaible for non null values, and the model prediction for null values. The script also visualizes the decision tree, 
+map the results and examines how the classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function
+of the training data size.
+
+_Requirements:_
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- Output file from PPCA 4.0 ('osm_all_buildings_res_type_with_null' (Polygon), OSM all buildings)
+
+_Guide to run the script:_
+- Fill 0.2 box
+
+_Output :_
+- A geopackage file with a single layer :
+    * 'osm_all_buildings_res_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
