@@ -36,7 +36,7 @@ _Requirements:_
 
 _Guide to run the script:_
 - Fill box 0.2 within the code 
-- Put the output of step 1. (GHS raster) in your working directory
+- Put the output of step 1. in your working directory before running step 2.
   
 _Outputs :_
 - A raster file with the GHS population data
