@@ -1,4 +1,4 @@
-Environment settings for PPCA 1.0 Data download : GHS and OSM data acquisition
+Environment settings for PPCA 1.0
 
 Open to Anaconda Prompt and run the following commands
 conda create -n PPCA1
@@ -9,11 +9,11 @@ conda install -c conda-forge --strict-channel-priority osmnx
 conda install -c conda-forge qgis
 jupyter notebook
 
-In jupyter home, open and run "1.0 Data download.ipynb"
+In jupyter home, open and run .ipynb scripts
 
 -------------------------------------------------------------------------------
 
-Environment settings for PPCA 2.0 Data filter / Residential & Non-residential Buildings Classification based on Attribute values
+Environment settings for PPCA 2.0
 
 Open to Anaconda Prompt and run the following commands
 conda create -n PPCA2
@@ -23,12 +23,11 @@ conda install pandas
 conda install geopandas
 jupyter notebook
 
-In jupyter home, open and run "2.0 Data filter.ipynb"
+In jupyter home, open and run .ipynb scripts
 
 -------------------------------------------------------------------------------
 
-Environment settings for PPCA 3.0 Morphometry on buildings
-& PPCA 4.0 Residential & non-residential buildings : classification based on attributes
+Environment settings for PPCA 3.0 / 4.0 / 5.0 & 6.0
 
 Open to Anaconda Prompt and run the following commands
 conda create -n PPCA3
@@ -39,5 +38,4 @@ conda install geopandas
 conda install -c conda-forge momepy
 jupyter notebook
 
-In jupyter home, open and run "3.0 morphometry + height.ipynb"
-or "4.0 Residential classification based on attributes.ipynb"
+In jupyter home, open and run .ipynb scripts
