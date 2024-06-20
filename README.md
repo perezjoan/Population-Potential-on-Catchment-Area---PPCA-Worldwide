@@ -5,11 +5,17 @@ This repository is part of the emc2 research project.
 [emc2 project](https://emc2-dut.org/)  
 [ESPACE laboratory](https://www.umrespace.org/)
 
-## Global objectives :
+## Global Objectives
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. The protocol is designed to work globally; you only need to provide the coordinates of the bounding box for your area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt) The code is written in Python, and each script requires a specific environment. The environments are detailed below, with links to text files containing the necessary conda commands (e.g., conda create, conda install, etc.).
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims to evaluate population potential within specified catchment areas using various data sources and machine learning techniques. 
+
+## Sample Data
+
+The protocol is designed to work globally. The user only needs to provide the coordinates of a bounding box for the area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt).
 
 ## Installation Steps
+
+The code is written in Python, and each script requires a specific environment. The environments are detailed below with information containing the necessary commands to install the environnements.
 
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
@@ -17,7 +23,7 @@ Follow these steps to run the Python algorithms :
 - Activate an environment and run the related Python scripts
 
 ## Project sections
-**PPCA 1.0 Data download : GHS and OSM data acquisition** [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**PPCA 1.0 : GHS and OSM automated data acquisition** [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -46,7 +52,7 @@ _Outputs :_
     * 'osm_all_buildings' (Polygon), OSM all buildings
     * 'osm_all_streets' (LineString), OSM all streets
 
-**PPCA 2.0 Data filter / Residential & Non-residential Buildings Classification based on Attribute values**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+**PPCA 2.0 : Data filter / Preparation**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -115,7 +121,30 @@ Output :
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
 
-**PPCA 5.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Residential%20classification%20fill%20null%20with%20machine%20learning.ipynb)
+**PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier**: [Link to code]()
+
+_Description:_
+
+This script trains and evaluates a Decision Tree Classifier on OSM building data for evaluating the number of floors per building ('FL'). The 
+process begins by preparing the data, splitting it into training and testing subsets based on a specified training ratio. The classifier is then 
+trained on the training set and its accuracy is evaluated on the test set. Next, the trained model is used to predict missing 'FL' values (number
+of floors) in the OSM building data where 'FL' values are null. The output includes a new variable named 'FL_filled', which contains the original 
+'FL' values for non-null entries and model predictions fornull entries. Additionally, the script visualizes the decision tree, maps the results, 
+and explores how the classifier's accuracy varies with different proportions of training data, plotting accuracy as a function of the training 
+data size.
+
+_Requirements:_
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- Output file from PPCA 4.0 ('osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification and null)
+
+_Guide to run the script:_
+- Fill 0.2 box
+
+_Output :_
+- A geopackage file with a single layer :
+    * 'osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier
+
+**PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code]()
 
 _Description:_
 
@@ -129,11 +158,21 @@ of the training data size.
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 4.0 ('osm_all_buildings_res_type_with_null' (Polygon), OSM all buildings)
+- Output file from PPCA 5.0 ('osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier)
 
 _Guide to run the script:_
 - Fill 0.2 box
 
 _Output :_
 - A geopackage file with a single layer :
-    * 'osm_all_buildings_res_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
+    * 'osm_all_buildings_FL_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
+      
+**PPCA 7.0 : Population potential estimation per building** _Work in progress_
+
+**PPCA 8.0 : Population potential estimation per catchment areas** _Work in progress_
+
+## Acknowledgement 
+This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
+
+## License
+The emc2 project is licensed under the [Attribution-ShareAlike 4.0 International]. See the [LICENSE](https://github.com/perezjoan/PPCA-codes?tab=CC-BY-SA-4.0-1-ov-file) file for details.
