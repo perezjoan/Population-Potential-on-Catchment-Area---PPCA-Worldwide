@@ -121,7 +121,7 @@ Output :
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
 
-**PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier**: [Link to code]()
+**PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Floor%20classification%20null%20filled%20by%20classifier.ipynb)
 
 _Description:_
 
@@ -144,7 +144,7 @@ _Output :_
 - A geopackage file with a single layer :
     * 'osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier
 
-**PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code]()
+**PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/6.0%20Residential%20classification%20null%20filled%20by%20classifier.ipynb)
 
 _Description:_
 
