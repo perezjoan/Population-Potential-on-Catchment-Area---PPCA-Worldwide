@@ -5,15 +5,15 @@ This repository is part of the emc2 research project.
 [emc2 project](https://emc2-dut.org/)  
 [ESPACE laboratory](https://www.umrespace.org/)
 
-## Objectives
+# Objectives
 
 This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims at evaluating population potentials within specified catchment areas using [OpenStreetMap](https://www.openstreetmap.org/) and [Global Human Settlement](https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php) data sources and machine learning techniques. In addition, the protocol can fill the missing values for OSM building data (floors & residential buildings), estimate population per OSM residential building, and estimate population over different catchment areas (walking distance over the network using graphs).
 
-## Sample Data
+# Sample Data
 
 The protocol is designed to work globally. The user only needs to provide the coordinates of a bounding box for the area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt).
 
-## Installation Steps
+# Installation Steps
 
 The code is written in Python, and each script requires a specific environment. The environments are detailed below with information containing the necessary commands to install the environnements.
 
@@ -22,9 +22,9 @@ Follow these steps to run the Python algorithms :
 - Navigate to the relevant section and create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
 - Activate an environment and run the related Python scripts
 
-## Project sections
-# Project
-**PPCA 1.0 : GHS and OSM automated data acquisition** [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+# Project sections
+
+## PPCA 1.0 : GHS and OSM automated data acquisition [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -53,7 +53,7 @@ _Outputs :_
     * 'osm_all_buildings' (Polygon), OSM all buildings
     * 'osm_all_streets' (LineString), OSM all streets
 
-**PPCA 2.0 : Data filter / Preparation**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+## PPCA 2.0 : Data filter / Preparation: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
@@ -76,7 +76,7 @@ _Outputs :_
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
     * 'non_pedestrian_streets' (LineString), OSM non-pedestrian streets
 
-**PPCA 3.0 Morphometry on Buildings**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
+## PPCA 3.0 Morphometry on Buildings: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
 
 _Description:_
 
@@ -99,7 +99,7 @@ _Output :_
 - A geopackage file with a single layer
     * 'osm_all_buildings_ind' (Polygon), osm buildings with height/floor values completed and with morphometric indicators
  
-**PPCA 4.0 Residential & non-residential buildings : classification based on attributes**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
+## PPCA 4.0 Residential & non-residential buildings : classification based on attributes: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
 
 _Description:_
 
@@ -122,7 +122,7 @@ Output :
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
 
-**PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Floor%20classification%20null%20filled%20by%20classifier.ipynb)
+## PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Floor%20classification%20null%20filled%20by%20classifier.ipynb)
 
 _Description:_
 
@@ -145,7 +145,7 @@ _Output :_
 - A geopackage file with a single layer :
     * 'osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier
 
-**PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier**: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/6.0%20Residential%20classification%20null%20filled%20by%20classifier.ipynb)
+## PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/6.0%20Residential%20classification%20null%20filled%20by%20classifier.ipynb)
 
 _Description:_
 
@@ -168,12 +168,12 @@ _Output :_
 - A geopackage file with a single layer :
     * 'osm_all_buildings_FL_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
       
-**PPCA 7.0 : Population potential estimation per building** _Work in progress_
+## PPCA 7.0 : Population potential estimation per building _Work in progress_
 
-**PPCA 8.0 : Population potential estimation per catchment areas** _Work in progress_
+## PPCA 8.0 : Population potential estimation per catchment areas _Work in progress_
 
-## Acknowledgement 
+# Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
 
-## License
+# License
 The emc2 project is licensed under the [Attribution-ShareAlike 4.0 International]. See the [LICENSE](https://github.com/perezjoan/PPCA-codes?tab=CC-BY-SA-4.0-1-ov-file) file for details.
