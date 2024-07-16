@@ -43,7 +43,7 @@ _Requirements:_
 
 _Guide to run the script:_
 - Fill box 0.2 within the code 
-- Put the output of step 1. in your working directory before running step 2.
+- Within the code, put the output of step # 1. (Download GHS raster on cloud) in your working directory before running step # 2. (Convert and save GHS as vector data on your local machine)
   
 _Outputs :_
 - A raster file with the GHS population data
@@ -57,9 +57,12 @@ _Outputs :_
 
 _Description:_
 
-The script processes and filter spatial data from OSM and GHS sources for further analysis. It performs four main tasks: (1) It reads and filters 
-Global Human Settlement (GHS) data by rounding values and removing meshes with zero population (2) It filters OpenStreetMap (OSM) streets data to 
-separate pedestrian and non-pedestrian streets (3) It filters OSM land use data to identify non-populated areas.
+The script processes and filter spatial data from OSM and GHS sources for further analysis. It performs three main tasks: (1) filters out buildings with a 
+footprint area less than 15 m², underground buildings, and optionally filters out buildings that have no walls, if the 'wall' column exists. (2) It reads 
+and filters Global Human Settlement (GHS) population data by rounding values and removing meshes with zero population (3) It filters OpenStreetMap (OSM) 
+streets data to separate pedestrian and non-pedestrian streets based on the following attributes: "motorway|motorway_link|trunk|trunk_link|cycleway"
+(4) It filters OSM land use data to identify non-populated areas based on the following attributes:"construction|cemetery|education|healthcare|industrial|
+military|railway|religious|port|winter_sports". Filtered and filtered out features are saved in two separate geopackage files.
 
 _Requirements:_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
@@ -70,11 +73,15 @@ _Guide to run the script:_
 - Fill 0.2 box within the script
 
 _Outputs :_
-- A geopackage file with 4 layers :
+- A first geopackage file with 4 layers :
+    * 'osm_building_filtered' (Polygon), OSM buildings with light structures filtered out
     * 'ghs_populated_2020_vector'(Polygon),  GHS population data with non null values
-    * 'osm_non_populated_areas ' (Polygon), OSM land use data with non-populated areas
+    * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
+- A second geopackage file with 3 layers (filtered out features) :
     * 'non_pedestrian_streets' (LineString), OSM non-pedestrian streets
+    * 'osm_building_filtered_out' (Polygon), filtered out OSM buildings
+    * 'osm_populated_areas' (Polygon), OSM land use data with populated areas
 
 ## PPCA 3.0 Morphometry on Buildings: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
 
