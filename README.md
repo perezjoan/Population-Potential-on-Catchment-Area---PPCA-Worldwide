@@ -23,6 +23,7 @@ Follow these steps to run the Python algorithms :
 - Activate an environment and run the related Python scripts
 
 ## Project sections
+# Project
 **PPCA 1.0 : GHS and OSM automated data acquisition** [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
