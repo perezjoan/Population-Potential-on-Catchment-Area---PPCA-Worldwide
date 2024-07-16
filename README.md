@@ -5,9 +5,9 @@ This repository is part of the emc2 research project.
 [emc2 project](https://emc2-dut.org/)  
 [ESPACE laboratory](https://www.umrespace.org/)
 
-## Global Objectives
+## Objectives
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims at evaluating population potentials within specified catchment areas using [OpenStreetMap](https://www.openstreetmap.org/) and [Global Human Settlement](https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php) data sources and machine learning techniques. 
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims at evaluating population potentials within specified catchment areas using [OpenStreetMap](https://www.openstreetmap.org/) and [Global Human Settlement](https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php) data sources and machine learning techniques. In addition, the protocol can fill the missing values for OSM building data (floors & residential buildings), estimate population per OSM residential building, and estimate population over different catchment areas (walking distance over the network using graphs).
 
 ## Sample Data
 
