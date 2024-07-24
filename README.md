@@ -7,7 +7,7 @@ This repository is part of the emc2 research project.
 
 # Objectives
 
-This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, which is a part of the [EMC2 research project](https://emc2-dut.org/). The project aims at evaluating population potentials within specified catchment areas using [OpenStreetMap](https://www.openstreetmap.org/) and [Global Human Settlement](https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php) data sources and machine learning techniques. The protocol automatically download OSM and GHS data ([Section 1.0](https://github.com/perezjoan/PPCA-codes/blob/main/README.md#ppca-10--ghs-and-osm-automated-data-acquisition-link-to-code)), perform several filters on the data ([Section 2.0](https://github.com/perezjoan/PPCA-codes/blob/main/README.md#ppca-10--ghs-and-osm-automated-data-acquisition-link-to-code)), calculates morphometric indicators for the OSM buildings ([Section 3.0](https://github.com/perezjoan/PPCA-codes/blob/main/README.md#ppca-10--ghs-and-osm-automated-data-acquisition-link-to-code)), fill the missing values for OSM building data (floors ([Section 4.0](https://github.com/perezjoan/PPCA-codes/blob/main/README.md#ppca-10--ghs-and-osm-automated-data-acquisition-link-to-code)) & residential buildings ([Section 5.0](https://github.com/perezjoan/PPCA-codes/blob/main/README.md#ppca-10--ghs-and-osm-automated-data-acquisition-link-to-code))), estimate population per OSM residential building, and estimate population over different catchment areas (walking distance over the network using graphs).
+This repository contains the implementation of the PPCA (Population Potential on Catchment Areas) protocol, a four-step procedure for acquiring, processing, and analyzing geospatial data from [OpenStreetMap (OSM)](https://www.openstreetmap.org/) and [Global Human Settlement (GHS)](https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php) data using Python and associated libraries. The project aims at evaluating population potentials within specified catchment areas. The protocol works globally by requiring only bounding box coordinates instead of sample data. The first step involves authenticating with Google Earth Engine to download GHS raster data for a specified area, converting it to vector format, and extracting and filtering OSM data for buildings, streets, and land use. The second step calculates various morphometric indicators for buildings and uses a Decision Tree Classifier to estimate missing values for the number of floors. The third step classifies buildings as residential or non-residential using OSM attributes and further refines the classification with a Decision Tree Classifier to fill in missing values. The final step estimates population distribution within residential buildings based on floor area, associates these estimates with a pedestrian street network, and performs spatial analysis to map potential population distribution across various catchment areas. Each step outputs cleaned and processed geospatial data in the form of geopackage files, which can be used for further analysis and mapping.
 
 # Sample Data
 
@@ -24,160 +24,131 @@ Follow these steps to run the Python algorithms :
 
 # Project sections
 
-## PPCA 1.0 : GHS and OSM automated data acquisition [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+## STEP 1: GHS & OSM DATA ACQUISITION - FILTERS [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
 _Description:_
 
-This script facilitates the acquisition of spatial data using a combination of Google Earth Engine, OpenStreetMap, and QGIS tools. 
-It starts by authenticating and initializing Earth Engine and downloading Global Human Settlement (GHS) raster data for a specified year. 
-The GHS data is then exported as a raster image for a defined geographical area. Once downloaded, the raster data is converted to vector data using
-QGIS and saved in a local GeoPackage. The script proceeds to extract building data within the same geographical area from OpenStreetMap, cleans the
-data by removing any list-type columns, and saves the cleaned data into the GeoPackage. Additionally, the script extracts street data from 
-OpenStreetMap, converting it into a GeoDataFrame format and filtering it to separate pedestrian streets from primary roads. Both sets of street data
-are visualized and saved in the GeoPackage. The result is a set of spatial data layers, including GHS population data, building footprints, and 
-street layers.
+This script facilitates the acquisition of OpenStreetMap (OSM) and Global Human Settlement (GHS) data using the Google Earth Engine and the
+osmnx library. It only requires the coordinates of a bounding box (WGS 84 decimal degrees). It starts by authenticating and initializing 
+Earth Engine in order to download Global Human Settlement (GHS) raster data for a specified year and for the defined geographical area 
+(bounding box). The GHS data is then saved on the cloud (google drive) as a raster image. The raster  image shall then manually be put in 
+the local working directory linked to this script. Then, the raster image is converted to vector data. The script proceeds to extract 
+building, street, and land use data within the same geographical area from OpenStreetMap (up to date). Data are cleaned by removing 
+list-type columns. Then, the script performs four main tasks: (1) filters out buildings with a footprint area less than 15 m², 
+underground buildings, and optionally filters out buildings that have no walls, if the 'wall' column exists. (2) It reads and filters 
+Global Human Settlement (GHS) data by rounding values and removing meshes with zero population (3) It filters OpenStreetMap (OSM) streets
+data to separate pedestrian and non-pedestrian streets based on the following attributes: "motorway|motorway_link|trunk|trunk_link|cycleway"
+(4) It filters OSM land use data to identify non-populated areas based on the following attributes:"construction|cemetery|education|
+healthcare|industrial|military|railway|religious|port|winter_sports". Data are saved into two geopackages : cleaned raw data and retained 
+features (Appendix 1). A report with maps and statistics can be produced (Appendix 2).
 
-_Requirements:_
+_Requirements_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
+- Coordinates of a bounding box (WGS 84 decimal degrees)
 
-_Guide to run the script:_
-- Fill box 0.2 within the code 
-- Within the code, put the output of step # 1. (Download GHS raster on cloud) in your working directory before running step # 2. (Convert and save GHS as vector data on your local machine)
+_Guide to run PPCA STEP 1_
+- Fill 0.1 box and run the script
+- Put the output of step # 1.1 (GHS raster file) in your working directory before running step # 1.2
   
-_Outputs :_
-- A raster file with the GHS population data
-- A geopackage file with 4 layers :
+_Output_
+- A raster file with the GHS population data at a given date
+- PPCA_1-1_{Name}_raw: Cleaned Raw data. A geopackage file with 4 layers
     * 'ghs_{date}_vector'(Polygon),  GHS population data at a given date
     * 'osm_all_area_categories ' (Polygon), OSM land use data with non-populated areas
     * 'osm_all_buildings' (Polygon), OSM all buildings
     * 'osm_all_streets' (LineString), OSM all streets
-
-## PPCA 2.0 : Data filter / Preparation: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
-
-_Description:_
-
-The script processes and filter spatial data from OSM and GHS sources for further analysis. It performs three main tasks: (1) filters out buildings with a 
-footprint area less than 15 m², underground buildings, and optionally filters out buildings that have no walls, if the 'wall' column exists. (2) It reads 
-and filters Global Human Settlement (GHS) population data by rounding values and removing meshes with zero population (3) It filters OpenStreetMap (OSM) 
-streets data to separate pedestrian and non-pedestrian streets based on the following attributes: "motorway|motorway_link|trunk|trunk_link|cycleway"
-(4) It filters OSM land use data to identify non-populated areas based on the following attributes:"construction|cemetery|education|healthcare|industrial|
-military|railway|religious|port|winter_sports". Filtered and filtered out features are saved in two separate geopackage files.
-
-_Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 1.0 ('ghs_{date}_vector'(Polygon),  GHS population data at a given date ; 'osm_all_area_categories ' (Polygon), OSM land use
-data with non-populated areas ; 'osm_all_streets' (LineString), OSM all streets)
-
-_Guide to run the script:_
-- Fill 0.2 box within the script
-
-_Outputs :_
-- A first geopackage file with 4 layers :
+- PPCA_1-2_{Name}_retained: Retained features. A geopackage file with 4 layers
     * 'osm_building_filtered' (Polygon), OSM buildings with light structures filtered out
     * 'ghs_populated_2020_vector'(Polygon),  GHS population data with non null values
     * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
-- A second geopackage file with 3 layers (filtered out features) :
-    * 'non_pedestrian_streets' (LineString), OSM non-pedestrian streets
-    * 'osm_building_filtered_out' (Polygon), filtered out OSM buildings
-    * 'osm_populated_areas' (Polygon), OSM land use data with populated areas
 
-## PPCA 3.0 Morphometry on Buildings: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
+## STEP 2: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
 
-_Description:_
+_Description_
 
-This script performs several calculations and transformations on a layer of OSM buildings. It begins by ensuring the columns 'height' and 'building
-are numeric, converting any non-numeric entries to NaN. The script then fills missing 'height' values by multiplying floors by 3, assuming an 
-average floor height of 3 meters. Conversely, it fills missing building values by dividing 'height' by 3 and rounding the result. It calculates and
-prints the number and percentage of rows with NaN in both 'height' and 'building. Several new columns are computed: 'FL' for the number of floors,
-'A' for the surface area, 'P' for the perimeter, 'E' for elongation, 'C' for convexity, 'FA' for floor area, 'ECA' for a product involving 
-elongation, convexity, and area, 'EA' for another elongation-area product, and 'SW' for shared walls ratio. Finally, the script renames 
-'building:floors' to 'FL'.
+This script performs several calculations and transformations on the OSM buildings. It begins by ensuring the columns 'height' and 
+'building are numeric, converting any non-numeric entries to Null. The script then fills missing 'height' values by multiplying floors by 3,
+assuming an average floor height of 3 meters. Conversely, it fills missing building values by dividing 'height' by 3 and rounding the 
+result. It calculates and prints the number and percentage of rows with Null in both 'height' and 'building. Several new columns are 
+computed: 'FL' for the number of floors, 'A' for the surface area, 'P' for the perimeter, 'E' for elongation, 'C' for convexity, 
+'FA' for floor area, 'ECA' for a product involving elongation, convexity, and area, 'EA' for another elongation-area product, and 'SW' for
+shared walls ratio. Finally, the script renames 'building:floors' to 'FL'. Using these indicators, the script uses a Decision Tree 
+Classifier for evaluating the missing values for the number of floors per building ('FL'). The protocol begins by preparing the data, 
+splitting it into training and testing subsets based on a specified training ratio. The classifier is then trained on the training set and
+its accuracy is evaluated on the test data set. Next, the trained model is used to predict missing 'FL' values (number of floors) in the 
+OSM building data where 'FL' values are null. The output includes a new variable named 'FL_filled', which contains the original'FL' values
+for non-null entries and model predictions for null entries. Floor-area ('FA') is corrected using the model. Additionally, the script 
+visualizes the decision tree, maps the results, and explores how the classifier's accuracy varies with different proportions of training 
+data, plotting accuracy as a function of the training data size.
 
-_Requirements:_
+_Requirements_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 1.0 ('osm_all_buildings' (Polygon), OSM all buildings)
+- Output file PPCA_1-2_{Name}_retained.gpkg ('osm_building_filtered' (Polygon), OSM buildings with light structures filtered out)
 
-_Guide to run the script:_
-- Fill 0.2 box
+_Guide to run PPCA STEP 2_
+- Fill 0.1 box and run the script
 
-_Output :_
-- A geopackage file with a single layer
-    * 'osm_all_buildings_ind' (Polygon), osm buildings with height/floor values completed and with morphometric indicators
+_Output_
+- PPCA_2-1_{Name}_IND_FL: Indicators and floors. A geopackage file with a single layer
+     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
+     Decision Tree Classifier
+
+## STEP 3: RESIDENTIAL & NON-RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
+
+_Description_
+
+This script creates a column 'type' within the OSM building data with three possible values (# 0 : Null ; 1: residential or mixed-use ; 2: 
+non-residential). Values are filled using the OSM attributes 'building_type' : apartments', 'barracks', 'house', 'residential', 'bungalow',
+'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house' & 'stilt_house' are considered as residential or mixed-use
+buildings. The classification is refined by attributing 0 values to Null values based on the spatial relationships with non-populated OSM 
+land use areas. Final score of classified buildings vs buldings with Null values are printed and mapped. This script then estimated the 
+Null values using the morphometric indicators calculated in PPCA 2.0 using a Decision Tree Classifier. It splits the dataset into training
+and testing subsets based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on
+the test set. the trained model is used to predict the Null values for 'type'. Within the output, a new variable 'type_filled' is created 
+with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes the value of the OSM 'type' variable for non
+Null values, and the model prediction for Null values. The script also visualizes the decision tree, maps the results and examines how the
+classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function of the training data size.
+
+_Requirements_
+- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- Output file PPCA_1-2_{Name}_retained.gpkg ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
+- Output file PPCA_2-1_{Name}_IND_FL.gpkg ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing 
+number of floors filled by Decision Tree Classifier)
+
+_Guide to run PPCA STEP 3_
+- Fill 0.1 box and run the script
+
+_Output_
+- PPCA_3-1_{Name}_TYPE: building type filled. A geopackage file with a single layer
+    * 'osm_buildings_res_type' (Polygon), building type filled by DTS
  
-## PPCA 4.0 Residential & non-residential buildings : classification based on attributes: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
+## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
 
-_Description:_
+_Description_
 
-This script filter out buildings with a footprint area less than 15 m² and optionally filters out buildings that have no walls, if the 'wall' column
-exists. It then create a column 'type' within the OSM building data with three possible values (# 0 : NA ; 1 : residential or mixed-use ; 
-2 : non-residential). Values are filled using the OSM attributes 'building_type' : apartments', 'barracks', 'house', 'residential', 'bungalow', 
-'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house' & 'stilt_house' are considered as residential or mixed-use 
-buildings. Finally, the classification is refined by attributing 0 values to null values based on the spatial relationships with non-populated 
-OSM land use areas. Final score of classified buildings vs buldings with null values are printed and mapped.
+This script estimates population distribution within residential buildings based on floor area. The script filters the buildings to retain
+only residential types. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each
+building with its respective population values. It then disaggregates the population estimates (VALUE) based on these FA ratios to derive 
+a population estimation (Pop_estimation) for each building. This population estimation is then integrated into a pedestrian street network
+analysis (graph using cityseer). Points are generated along pedestrian streets at regular intervals, and the potential population is
+associated to these points within various catchment areas. The distance between the points to be generated along the network, as well
+as the catchment area distances can be parameterized.
 
-_Requirements:_
+_Requirements_
 - A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 3.0 ('osm_all_buildings_ind' (Polygon), OSM all buildings)
-- Output file from PPCA 2.0 ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
+- Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
+- Output file from PPCA 3-1_{Name}_TYPE ('osm_buildings_res_type' (Polygon), osm buildings with residential classification null filled by 
+Decision Tree Classifier)
 
-_Guide to run the script:_
-- Fill 0.2 box
 
-Output :
+_Guide to run PPCA STEP 4_
+- Fill 0.1 box and run the script
+
+_Output_
 - A geopackage file with a single layer
     * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
-
-## PPCA 5.0 Floor : Floor : Fill null values with decision tree classifier: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/5.0%20Floor%20classification%20null%20filled%20by%20classifier.ipynb)
-
-_Description:_
-
-This script trains and evaluates a Decision Tree Classifier on OSM building data for evaluating the number of floors per building ('FL'). The 
-process begins by preparing the data, splitting it into training and testing subsets based on a specified training ratio. The classifier is then 
-trained on the training set and its accuracy is evaluated on the test set. Next, the trained model is used to predict missing 'FL' values (number
-of floors) in the OSM building data where 'FL' values are null. The output includes a new variable named 'FL_filled', which contains the original 
-'FL' values for non-null entries and model predictions fornull entries. Additionally, the script visualizes the decision tree, maps the results, 
-and explores how the classifier's accuracy varies with different proportions of training data, plotting accuracy as a function of the training 
-data size.
-
-_Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 4.0 ('osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification and null)
-
-_Guide to run the script:_
-- Fill 0.2 box
-
-_Output :_
-- A geopackage file with a single layer :
-    * 'osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier
-
-## PPCA 6.0 Residential & non-residential buildings : fill values with decision tree classifier: [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/6.0%20Residential%20classification%20null%20filled%20by%20classifier.ipynb)
-
-_Description:_
-
-This script trains and evaluates a Decision Tree Classifier on OSM building data. Initially, it splits the dataset into training and testing subsets 
-based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on the test set. Subsequently,
-it applies the trained model to predict missing 'type' values on the OSM building data with missing values for 'type'. Within the output, a new 
-variabme containing named 'type_filled' is created with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes
-the value of the OSM 'type' varaible for non null values, and the model prediction for null values. The script also visualizes the decision tree, 
-map the results and examines how the classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function
-of the training data size.
-
-_Requirements:_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA 5.0 ('osm_all_buildings_FL_filled' (Polygon), osm buildings with number of floors filled by Decision Tree Classifier)
-
-_Guide to run the script:_
-- Fill 0.2 box
-
-_Output :_
-- A geopackage file with a single layer :
-    * 'osm_all_buildings_FL_type_filled' (Polygon), osm buildings with residential classification null filled by Decision Tree Classifier
-      
-## PPCA 7.0 : Population potential estimation per building _Work in progress_
-
-## PPCA 8.0 : Population potential estimation per catchment areas _Work in progress_
 
 # Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
