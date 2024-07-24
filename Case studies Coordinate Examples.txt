@@ -1,8 +1,8 @@
 Nice (South of France) - EPSG:2154
-xMin = 7.15
-xMax = 7.35
-yMin = 43.62
-yMax = 43.85
+xMin = 7.1
+xMax = 7.4
+yMin = 43.6
+yMax = 43.9
 
 Lille (North of France) - EPSG:2154
 xMin = 2.90
@@ -27,3 +27,5 @@ xMin = 10.12
 xMax = 10.35
 yMin = 43.8
 yMax = 44.0
+
+Tool to define your bounding box : https://coordinates-converter.com/
