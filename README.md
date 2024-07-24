@@ -1,4 +1,4 @@
-# PPCA-worldwide-protocol
+# PPCA-worldwide-protocol v1.0
  Population Potential on Catchment Area - Worldwide Protocol
 
 This repository is part of the emc2 research project.
@@ -11,7 +11,7 @@ This repository contains the implementation of the PPCA (Population Potential on
 
 # Sample Data
 
-The protocol is designed to work globally. The user only needs to provide the coordinates of a bounding box for the area of interest. Coordinate examples are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt).
+The protocol is designed for global application, requiring only the coordinates of a bounding box for the area of interest. Examples of coordinates are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Case%20studies%20Coordinate%20Examples.txt), and this [tool](https://coordinates-converter.com/) can be used to quickly identify the necessary coordinates.
 
 # Installation Steps
 
@@ -19,8 +19,8 @@ The code is written in Python, and each script requires a specific environment. 
 
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
-- Navigate to the relevant section and create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
-- Activate an environment and run the related Python scripts
+- Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
+- Activate the environment and run the related Python scripts
 
 # Project sections
 
