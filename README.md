@@ -22,7 +22,7 @@ Follow these steps to run the Python algorithms :
 - Activate the environment and run the related Python scripts
 
 # Releases
-- V1.0 on 7/24/2024 - First version of the four-step procedure
+- V1.0 on 7/24/2024 - First version of the four-step procedure. Automated PDF report for STEP 1.
 
 # Project sections
 
