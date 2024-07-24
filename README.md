@@ -3,7 +3,6 @@
 
 This repository is part of the emc2 research project.
 [emc2 project](https://emc2-dut.org/)  
-[ESPACE laboratory](https://www.umrespace.org/)
 
 # Objectives
 
