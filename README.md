@@ -45,7 +45,7 @@ healthcare|industrial|military|railway|religious|port|winter_sports". Data are s
 features (Appendix 1). A report with maps and statistics can be produced (Appendix 2).
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
 - Coordinates of a bounding box (WGS 84 decimal degrees)
 
@@ -86,7 +86,7 @@ visualizes the decision tree, maps the results, and explores how the classifier'
 data, plotting accuracy as a function of the training data size.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_building_filtered' (Polygon), OSM buildings with light structures filtered out)
 
 _Guide to run PPCA STEP 2_
@@ -114,7 +114,7 @@ Null values, and the model prediction for Null values. The script also visualize
 classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function of the training data size.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
 - Output file PPCA_2-1_{Name}_IND_FL.gpkg ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing 
 number of floors filled by Decision Tree Classifier)
@@ -139,7 +139,7 @@ associated to these points within various catchment areas. The distance between 
 as the catchment area distances can be parameterized.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
 - Output file from PPCA 3-1_{Name}_TYPE ('osm_buildings_res_type' (Polygon), osm buildings with residential classification null filled by 
 Decision Tree Classifier)
