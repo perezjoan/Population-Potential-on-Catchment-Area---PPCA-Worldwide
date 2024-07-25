@@ -32,7 +32,7 @@ Follow these steps to run the Python algorithms :
 
 # Project sections
 
-## STEP 1: DATA ACQUISITION - FILTERS - MORPHOMETRY [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20GHS%20%26%20OSM%20DATA%20ACQUISITION%20-%20FILTERS.ipynb)
+## STEP 1: DATA ACQUISITION - FILTERS - MORPHOMETRY [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%201%20-%20DATA%20ACQUISITION%20-%20FILTERS%20-%20MORPHOMETRY.ipynb)
 
 _Description:_
 
@@ -74,7 +74,7 @@ _Output_
     * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
 
-## STEP 2: RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20MORPHOMETRY%20%2B%20FLOOR%20CLASSIFICATION.ipynb)
+## STEP 2: RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%202%20-%20RESIDENTIAL%20BUILDINGS%20CLASSIFICATION.ipynb)
 
 _Description_
 
@@ -102,7 +102,7 @@ _Output_
      * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
      Decision Tree Classifier
 
-## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20RESIDENTIAL%20%26%20NON-RESIDENTIAL%20BUILDINGS%20CLASSIFICATION.ipynb)
+## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%203%20-%20FLOOR%20CLASSIFICATION.ipynb)
 
 _Description_
 
@@ -131,7 +131,7 @@ _Output_
      * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
      Decision Tree Classifier
  
-## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20POPULATION%20POTENTIAL%20PER%20BUILDING%20%26%20PER%20CATCHMENT%20AREA.ipynb)
+## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%204%20-%20POPULATION%20POTENTIAL%20PER%20BUILDING%20%26%20PER%20CATCHMENT%20AREA.ipynb)
 
 _Description_
 
