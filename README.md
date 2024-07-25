@@ -18,12 +18,15 @@ The code is written in Python, and each script requires a specific environment. 
 
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
-- Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt).
+- Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
 - Activate the environment and run the related Python scripts
+
+# Releases
+- V1.0 on 7/24/2024 - First version of the four-step procedure. Automated PDF report for STEP 1.
 
 # Project sections
 
-## STEP 1: GHS & OSM DATA ACQUISITION - FILTERS [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+## STEP 1: GHS & OSM DATA ACQUISITION - FILTERS [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20GHS%20%26%20OSM%20DATA%20ACQUISITION%20-%20FILTERS.ipynb)
 
 _Description:_
 
@@ -42,7 +45,7 @@ healthcare|industrial|military|railway|religious|port|winter_sports". Data are s
 features (Appendix 1). A report with maps and statistics can be produced (Appendix 2).
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
 - Coordinates of a bounding box (WGS 84 decimal degrees)
 
@@ -63,7 +66,7 @@ _Output_
     * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
 
-## STEP 2: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/1.0%20Import_ghs_osm_data.ipynb)
+## STEP 2: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/2.0%20MORPHOMETRY%20%2B%20FLOOR%20CLASSIFICATION.ipynb)
 
 _Description_
 
@@ -83,7 +86,7 @@ visualizes the decision tree, maps the results, and explores how the classifier'
 data, plotting accuracy as a function of the training data size.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_building_filtered' (Polygon), OSM buildings with light structures filtered out)
 
 _Guide to run PPCA STEP 2_
@@ -94,7 +97,7 @@ _Output_
      * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
      Decision Tree Classifier
 
-## STEP 3: RESIDENTIAL & NON-RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20morphometry%20%2B%20height.ipynb)
+## STEP 3: RESIDENTIAL & NON-RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/3.0%20RESIDENTIAL%20%26%20NON-RESIDENTIAL%20BUILDINGS%20CLASSIFICATION.ipynb)
 
 _Description_
 
@@ -111,7 +114,7 @@ Null values, and the model prediction for Null values. The script also visualize
 classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function of the training data size.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
 - Output file PPCA_2-1_{Name}_IND_FL.gpkg ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing 
 number of floors filled by Decision Tree Classifier)
@@ -123,7 +126,7 @@ _Output_
 - PPCA_3-1_{Name}_TYPE: building type filled. A geopackage file with a single layer
     * 'osm_buildings_res_type' (Polygon), building type filled by DTS
  
-## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20classif%20based%20on%20attributes.ipynb)
+## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/4.0%20POPULATION%20POTENTIAL%20PER%20BUILDING%20%26%20PER%20CATCHMENT%20AREA.ipynb)
 
 _Description_
 
@@ -136,7 +139,7 @@ associated to these points within various catchment areas. The distance between 
 as the catchment area distances can be parameterized.
 
 _Requirements_
-- A specific working environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
 - Output file from PPCA 3-1_{Name}_TYPE ('osm_buildings_res_type' (Polygon), osm buildings with residential classification null filled by 
 Decision Tree Classifier)
