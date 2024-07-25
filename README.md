@@ -22,7 +22,13 @@ Follow these steps to run the Python algorithms :
 - Activate the environment and run the related Python scripts
 
 # Releases
-- V1.0 on 7/24/2024 - First version of the four-step procedure. Automated PDF report for STEP 1.
+- v1.1 on 7/25/2024 - modifications :
+  * Morphometry indicators moved to STEP 1
+  * Residential building classification now performed before floor classification (STEP 2)
+  * Floor estimation only for residential buildings (STEP 3)
+  * Map of population potential per node for a given catchment area added in STEP 4
+
+- v1.0 on 7/24/2024 - First version of the four-step procedure.
 
 # Project sections
 
