@@ -1,4 +1,4 @@
-# PPCA-worldwide-protocol v1.0
+# PPCA-worldwide-protocol v1.1
  Population Potential on Catchment Area - Worldwide Protocol
 
 This repository is part of the emc2 research project.
