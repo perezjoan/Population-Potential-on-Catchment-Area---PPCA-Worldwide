@@ -14,8 +14,6 @@ The protocol is designed for global application, requiring only the coordinates 
 
 # Installation Steps
 
-The code is written in Python, and each script requires a specific environment. The environments are detailed below with information containing the necessary commands to install the environnements.
-
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
 - Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
