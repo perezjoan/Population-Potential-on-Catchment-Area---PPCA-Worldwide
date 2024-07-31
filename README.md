@@ -147,7 +147,7 @@ _Guide to run PPCA STEP 4_
 - Fill 0.1 box and run the script
 
 _Output_
- PPCA_4-1_{Name}_POP_CAT: Population and Catchment Areas. A geopackage file with 2 layers
+- PPCA_4-1_{Name}_POP_CAT: Population and Catchment Areas. A geopackage file with 2 layers
     * 'osm_buildings_pop_estimate' (Points), centroid of osm residential and mixed-use buildings with population estimations
     * 'points_catchment_stats' (Points), points generated along the pedestrian streets with population potential for different catchment
 areas
