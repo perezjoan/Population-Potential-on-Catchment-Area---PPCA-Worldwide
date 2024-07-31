@@ -129,11 +129,12 @@ _Description_
 
 This script estimates population distribution within residential buildings based on floor area. The script filters the buildings to retain
 only residential types. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each
-building with its respective population values. It then disaggregates the population estimates (VALUE) based on these FA ratios to derive 
+building with its respective population values. It then disaggregates the population estimates ('VALUE') based on these FA ratios to derive 
 a population estimation (Pop_estimation) for each building. This population estimation is then integrated into a pedestrian street network
 analysis (graph using cityseer). Points are generated along pedestrian streets at regular intervals, and the potential population is
-associated to these points within various catchment areas. The distance between the points to be generated along the network, as well
-as the catchment area distances can be parameterized.
+associated to these points within various catchment areas. The distance between the points to be generated along the network, as well as the
+catchment area distances can be parameterized. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian 
+network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'. 
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
@@ -146,8 +147,10 @@ _Guide to run PPCA STEP 4_
 - Fill 0.1 box and run the script
 
 _Output_
-- A geopackage file with a single layer
-    * 'osm_all_buildings_res_type_with_null' (Polygon), osm buildings with residential classification
+- PPCA_4-1_{Name}_POP_CAT: Population and Catchment Areas. A geopackage file with 2 layers
+    * 'osm_buildings_pop_estimate' (Points), centroid of osm residential and mixed-use buildings with population estimations
+    * 'points_catchment_stats' (Points), points generated along the pedestrian streets with population potential for different catchment
+areas
 
 # Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
