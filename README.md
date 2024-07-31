@@ -1,4 +1,4 @@
-# PPCA-worldwide-protocol v1.1
+# PPCA-worldwide-protocol
  Population Potential on Catchment Area - Worldwide Protocol
 
 This repository is part of the emc2 research project.
@@ -14,25 +14,17 @@ The protocol is designed for global application, requiring only the coordinates 
 
 # Installation Steps
 
-The code is written in Python, and each script requires a specific environment. The environments are detailed below with information containing the necessary commands to install the environnements.
-
 Follow these steps to run the Python algorithms :
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
 - Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
 - Activate the environment and run the related Python scripts
 
 # Releases
-- v1.1 on 7/25/2024 - modifications :
-  * Morphometry indicators moved to STEP 1
-  * Residential building classification now performed before floor classification (STEP 2)
-  * Floor estimation only for residential buildings (STEP 3)
-  * Map of population potential per node for a given catchment area added in STEP 4
-
-- v1.0 on 7/24/2024 - First version of the four-step procedure.
+- v1.0.0 on 7/30/2024 - First version of the four-step procedure.
 
 # Project sections
 
-## STEP 1: DATA ACQUISITION - FILTERS - MORPHOMETRY [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%201%20-%20DATA%20ACQUISITION%20-%20FILTERS%20-%20MORPHOMETRY.ipynb)
+## STEP 1: DATA ACQUISITION - FILTERS - MORPHOMETRY [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description:_
 
@@ -74,7 +66,7 @@ _Output_
     * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
 
-## STEP 2: RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%202%20-%20RESIDENTIAL%20BUILDINGS%20CLASSIFICATION.ipynb)
+## STEP 2: RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
@@ -102,7 +94,7 @@ _Output_
      * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
      Decision Tree Classifier
 
-## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%203%20-%20FLOOR%20CLASSIFICATION.ipynb)
+## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
@@ -131,7 +123,7 @@ _Output_
      * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
      Decision Tree Classifier
  
-## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/blob/main/PPCA%20v1.1%20-%20STEP%204%20-%20POPULATION%20POTENTIAL%20PER%20BUILDING%20%26%20PER%20CATCHMENT%20AREA.ipynb)
+## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
