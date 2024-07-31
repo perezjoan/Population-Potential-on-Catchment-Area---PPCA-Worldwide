@@ -20,6 +20,7 @@ Follow these steps to run the Python algorithms :
 - Activate the environment and run the related Python scripts
 
 # Releases
+- v1.0.1 on 7/31/2024 - Added a function (consolidate from cityseer) to remove close-by nodes
 - v1.0.0 on 7/30/2024 - First version of the four-step procedure.
 
 # Project sections
