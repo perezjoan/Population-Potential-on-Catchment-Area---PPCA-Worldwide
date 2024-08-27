@@ -152,6 +152,8 @@ _Output_
 - PPCA_4-1_{Name}_POP_CAT: Population and Catchment Areas. A geopackage file with 2 layers
     * 'osm_buildings_pop_estimate' (Points), centroid of osm residential and mixed-use buildings with population estimations
     * 'points_catchment_stats' (Points), points generated along the pedestrian streets with population potential for different catchment
+areas (sum, mean, maximum, minimum, variability)
+    * 'pedestrian_streets_avg_pop' (Lines), pedestrian streets streets with population potential (mean) for different catchment
 areas
 
 # Acknowledgement 
