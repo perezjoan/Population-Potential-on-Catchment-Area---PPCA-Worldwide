@@ -1,14 +1,15 @@
 Nice (South of France) - EPSG:2154
-xMin = 7.1
-xMax = 7.4
-yMin = 43.6
-yMax = 43.9
+Name = 'Nice'
+xMin = 6.84
+xMax = 7.6
+yMin = 44.2
+yMax = 43.44
 
 Lille (North of France) - EPSG:2154
-xMin = 2.90
-xMax = 3.27
-yMin = 50.52
-yMax = 50.80
+xMin = 2.45
+xMax = 3.35
+yMin = 50.3
+yMax = 50.8
 
 Goteborg (Sweden) - EPSG:3152
 xMin = 11.92
