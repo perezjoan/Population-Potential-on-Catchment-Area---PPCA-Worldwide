@@ -93,11 +93,10 @@ _Guide to run PPCA STEP 2_
 - Fill 0.1 box and run the script
 
 _Output_
-- PPCA_2-1_{Name}_IND_FL: Indicators and floors. A geopackage file with a single layer
-     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
-     Decision Tree Classifier
+- PPCA_2-1_{Name}_TYPE: Building types. A geopackage file with a single layer
+     * 'osm_buildings_res_type' (Polygon), osm buildings with building type filled by Decision Tree Classifier
 
-## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
+## STEP 3: FLOOR ESTIMATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
@@ -115,15 +114,14 @@ explores how the classifier's accuracy varies with different proportions of trai
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
-- Output file PPCA_2-1_{Name}_IND_FL.gpkg ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing 
-number of floors filled by Decision Tree Classifier)
+- Output file PPCA_2-1_{Name}_TYPE.gpkg ('osm_buildings_res_type' (Polygon), osm buildings with building type filled by Decision Tree Classifier
 
 _Guide to run PPCA STEP 3_
 - Fill 0.1 box and run the script
 
 _Output_
 - PPCA_3-1_{Name}_IND_FL: Indicators and floors. A geopackage file with a single layer
-     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
+     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential classification and missing number of floors filled by 
      Decision Tree Classifier
  
 ## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
@@ -142,8 +140,8 @@ network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchm
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
-- Output file from PPCA 3-1_{Name}_TYPE ('osm_buildings_res_type' (Polygon), osm buildings with residential classification null filled by 
-Decision Tree Classifier)
+- Output file from PPCA 3-1_{Name}_FL_filled ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential
+classification and missing number of floors filled by Decision Tree Classifier
 
 
 _Guide to run PPCA STEP 4_
