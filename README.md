@@ -60,7 +60,7 @@ Data are saved into two geopackages: cleaned raw data and retained features. The
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
-- Coordinates of a bounding box (WGS 84 decimal degrees)
+- Coordinates of a bounding box (WGS 84 decimal degrees) and EPSG reference
 
 _Guide to run PPCA STEP 1_
 - Fill 0.1 box and run the script
