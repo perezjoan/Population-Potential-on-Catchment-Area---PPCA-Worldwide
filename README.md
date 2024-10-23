@@ -16,11 +16,12 @@ The protocol is designed for global application, requiring only the coordinates 
 
 Follow these steps to run the Python algorithms on Windows:
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
-- Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
+- Create a specific environment (detailed PPCA environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
 - Activate the environment and run the related Python scripts
 
 # Releases
-- v1.0.3 on 9/02/2024 - Added a function de remove zero length edges in step 4
+- v1.0.4 on 10/23/2024 - Added a function to fill small segments with NA average values in step 4
+- v1.0.3 on 9/02/2024 - Added a function to remove zero length edges in step 4
 - v1.0.2 on 8/27/2024 - Added the mean population potential per pedestrian street in step 4
 - v1.0.1 on 7/31/2024 - Added a function (consolidate from cityseer) to remove close-by nodes in step 4
 - v1.0.0 on 7/30/2024 - First version of the four-step procedure.
@@ -31,26 +32,35 @@ Follow these steps to run the Python algorithms on Windows:
 
 _Description:_
 
-This script facilitates the acquisition of OpenStreetMap (OSM) and Global Human Settlement (GHS) data using the Google Earth Engine and the
-osmnx library. It only requires the coordinates of a bounding box (WGS 84 decimal degrees). It starts by authenticating and initializing 
-Earth Engine in order to download Global Human Settlement (GHS) raster data for a specified year and for the defined geographical area 
-(bounding box). The GHS data is then saved on the cloud (google drive) as a raster image (1.1). The raster  image shall then manually be put in 
-the local working directory linked to this script. Then, the raster image is converted to vector data (1.2). The script proceeds to extract 
-building, street, and land use data within the same geographical area from OpenStreetMap (up to date). Data are cleaned by removing 
-list-type columns. Then, the script performs other important tasks: (2.1) filters out buildings with a footprint area less than 15 m², 
-underground buildings, and optionally filters out buildings that have no walls, if the 'wall' column exists. (2.2) It reads and filters 
-Global Human Settlement (GHS) data by rounding values and removing meshes with zero population (2.3) It filters OpenStreetMap (OSM) streets
-data to separate pedestrian and non-pedestrian streets based on the following attributes: "motorway|motorway_link|trunk|trunk_link|cycleway"
-(2.4) It filters OSM land use data to identify non-populated areas based on the following attributes:"construction|cemetery|education|
-healthcare|industrial|military|railway|religious|port|winter_sports". (3) Several new morphometric indicators are computed: 'FL' for the number of
-floors, 'A' for the surface area, 'P' for the perimeter, 'E' for elongation, 'C' for convexity, 'FA' for floor area, 'ECA' for a product involving
-elongation, convexity, and area, 'EA' for another elongation-area product, and 'SW' for shared walls ratio. Data are saved into two geopackages:
-cleaned raw data and retained features (Appendix 1). A report with maps and statistics can be produced (Appendix 2).
+This script facilitates the acquisition of OpenStreetMap (OSM) and Global Human Settlement (GHS) data using Google Earth Engine, the osmnx library, and QGIS for processing. It requires the coordinates of a bounding box (WGS 84 decimal degrees) to define the geographical area. The script starts by authenticating and initializing Earth Engine to download GHS raster data for a specified year and geographical area (bounding box). The GHS data is saved on the cloud (Google Drive) as a raster image (Step 1.1), which is then manually moved to the local working directory.
+
+Using QGIS, the raster image is converted to vector data (Step 1.2) via the pixelstopolygons algorithm and saved as a geopackage. The script proceeds to extract building, street, and land use data from OpenStreetMap (OSM) for the same area. It removes non-polygon geometries, cleans up columns (removing list-type columns), and keeps only essential attributes for buildings and streets.
+
+The script performs several filtering operations:
+
+    - Buildings are filtered based on a minimum footprint area of 15 m², removal of underground buildings, and optional filtering for buildings with no walls (Step 2.1).
+    - GHS data is filtered by rounding population values and removing meshes with zero population (Step 2.2).
+    - OSM streets are filtered to separate pedestrian and non-pedestrian streets by excluding streets with the following attributes: "motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link", "residential", "unclassified", "service", "busway", "cycleway", "living_street", and "track". Streets are also excluded if they are in tunnels (attribute "tunnel" = 'yes') or if their maxspeed is greater than or equal to 60 km/h (values 60, 70, 80, 90, 100). Pedestrian streets are retained by ensuring they do not match these attributes or speed conditions (Step 2.3).
+    - OSM land use data is filtered to exclude non-populated areas by removing polygons with the following land use categories: "construction", "cemetery", "education", "healthcare", "industrial", "military", "railway", "religious", "port", and "winter_sports". Areas that do not fall under these land use categories are considered populated (Step 2.4).
+
+Morphometric indicators are computed for retained buildings:
+
+    - FL for the number of floors
+    - A for the surface area
+    - P for perimeter
+    - E for elongation
+    - C for convexity
+    - FA for floor area
+    - ECA for a product involving elongation, convexity, and area
+    - EA for an elongation-area product
+    - SW for the shared walls ratio
+
+Data are saved into two geopackages: cleaned raw data and retained features. The final output consists of filtered and cleaned vector data for GHS population, OSM buildings, streets, and land use areas. Optionally, a report with maps and statistics can be produced (Appendix 2).
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Authentication on google earth engine [Link to EE engine Authentication](https://code.earthengine.google.com/)
-- Coordinates of a bounding box (WGS 84 decimal degrees)
+- Coordinates of a bounding box (WGS 84 decimal degrees) and EPSG reference
 
 _Guide to run PPCA STEP 1_
 - Fill 0.1 box and run the script
@@ -73,17 +83,13 @@ _Output_
 
 _Description_
 
-This script creates a column 'type' within the OSM building data with three possible values (# 0 : Null ; 1: residential or mixed-use ; 2: 
-non-residential). Values are filled using the OSM attributes 'building_type' : apartments', 'barracks', 'house', 'residential', 'bungalow',
-'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house' & 'stilt_house' are considered as residential or mixed-use
-buildings. The classification is refined by attributing 0 values to Null values based on the spatial relationships with non-populated OSM 
-land use areas. Final score of classified buildings vs buldings with Null values are printed and mapped. This script then estimated the 
-Null values using the morphometric indicators calculated in PPCA STEP 1 using a Decision Tree Classifier. It splits the dataset into training
-and testing subsets based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on
-the test set. the trained model is used to predict the Null values for 'type'. Within the output, a new variable 'type_filled' is created 
-with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes the value of the OSM 'type' variable for non
-Null values, and the model prediction for Null values. The script also visualizes the decision tree, maps the results and examines how the
-classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function of the training data size.
+This script creates a 'type' column within the OSM building data with three possible values (0: Null, 1: residential or mixed-use, 2: non-residential). The initial classification is based on the 'building' attribute in OSM, where buildings such as 'apartments', 'barracks', 'house', 'residential', 'bungalow', 'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house', and 'stilt_house' are classified as residential or mixed-use (1).
+
+Next, the classification is refined through a spatial join with non-populated OSM land use areas. Buildings within non-populated areas are assigned as non-residential (2) if their 'type' is initially Null (0). The final classification statistics of buildings (classified vs Null) are printed and mapped.
+
+The script then estimates the remaining Null values for 'type' using a Decision Tree Classifier, trained on the morphometric indicators calculated in PPCA STEP 1 (e.g., area, perimeter, elongation, convexity). The data is split into training and testing subsets based on a specified training ratio, and the classifier's accuracy is evaluated on the test set. The trained model is then used to predict the Null 'type' values.
+
+The output includes a new variable 'type_filled', where non-null values from the original 'type' column are retained, and predicted values from the model are used to fill the previously Null entries. The script also visualizes the decision tree, maps the results, and explores how the classifier's accuracy varies with different training data sizes, plotting accuracy as a function of training size.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
@@ -100,16 +106,20 @@ _Output_
 
 _Description_
 
-This script begins by ensuring the columns 'height' and 'building:levels' are numeric, converting any non-numeric entries to Null. For residential
-buildings, the script then fills missing 'height' values by multiplying floors by 3, assuming an average floor height of 3 meters. Conversely, it 
-fills missing building values by dividing 'height' by 3 and rounding the result, again for residential buildings only. It calculates and prints the
-number and percentage of rows with Null in both 'height' and 'building. Using the morphometric indicators calculated in STEP 1, the script uses a 
-Decision Tree Classifier for evaluating the missing values for the number of floors per building ('FL'). The protocol then splits the data into 
-training and testing subsets based on a specified training ratio. The classifier is then trained on the training set and its accuracy is evaluated 
-on the test data set. Next, the trained model is used to predict missing 'FL' values (number of floors) in the OSM building data where 'FL' values
-are null. The output includes a new variable named 'FL_filled', which contains the original'FL' values for non-null entries and model predictions 
-for null entries. Floor-area ('FA') is corrected using the model. Additionally, the script visualizes the decision tree, maps the results, and 
-explores how the classifier's accuracy varies with different proportions of training data, plotting accuracy as a function of the training data size.
+This script processes OSM building data by focusing exclusively on residential or mixed-use buildings (type_filled = 1). It begins by ensuring that the 'height' and 'building
+' columns are numeric, converting any non-numeric entries to Null. For these residential buildings, missing 'height' values are filled by multiplying the number of floors ('building
+') by 3, assuming an average floor height of 3 meters. Conversely, missing 'building
+' values are filled by dividing the height by 3 and rounding the result.
+
+The script calculates and prints the number and percentage of rows where both 'height' and 'building
+' remain null. After renaming 'building
+' to 'FL' (floors), it recalculates the floor-area ('FA') by multiplying the number of floors ('FL') by the building footprint ('A').
+
+Next, the script applies a Decision Tree Classifier to predict missing 'FL' values using morphometric indicators (such as area, perimeter, elongation, and convexity) calculated in PPCA STEP 1. The data is split into training and testing sets based on a specified training ratio. The classifier is trained on the training set, and its accuracy is evaluated on the test set.
+
+The trained model is then applied to predict missing 'FL' values in the OSM building data. The output includes a new variable named 'FL_filled', which contains the original 'FL' values for non-null entries and model predictions for null entries. Since FA (floor-area) was calculated earlier in the script, it is now modified by correcting it with the newly predicted 'FL_filled' values.
+
+Additionally, the script visualizes the decision tree, evaluates the classifier's accuracy, and explores how accuracy varies with different proportions of training data.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
@@ -128,14 +138,11 @@ _Output_
 
 _Description_
 
-This script estimates population distribution within residential buildings based on floor area. The script filters the buildings to retain
-only residential types. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each
-building with its respective population values. It then disaggregates the population estimates ('VALUE') based on Floor-areas ratios (FA) to derive 
-a population estimation (Pop_estimation) for each building. This population estimation is then integrated into a pedestrian street network
-analysis (graph using cityseer). Points are generated along pedestrian streets at regular intervals, and the potential population is
-associated to these points within various catchment areas (vector of distances). The distance between the points to be generated along the network, as well as the
-catchment area distances can be parameterized. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian 
-network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'. 
+This script estimates population distribution within residential and mixed-use buildings based on floor area. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each building with its respective population values. The population estimates ('VALUE') are disaggregated based on the ratio of each building's floor area ('FA') to the total floor area within the same GHS population grid cell. This results in a population estimation ('Pop_estimation') for each building.
+
+The population estimation is then integrated into a pedestrian street network analysis using cityseer. Points are generated at regular intervals along pedestrian streets, with an optional offset applied to the first point. The population potential is associated with these points within various catchment areas, which are parameterized by customizable distances. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'.
+
+An optional step allows filling null values for small street segments by averaging nearby segments' population data.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
