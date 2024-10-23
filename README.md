@@ -14,14 +14,15 @@ The protocol is designed for global application, requiring only the coordinates 
 
 # Installation Steps
 
-Follow these steps to run the Python algorithms :
+Follow these steps to run the Python algorithms on Windows:
 - Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
 - Create a specific environment (detailed environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
 - Activate the environment and run the related Python scripts
 
 # Releases
-- v1.0.2 on 8/27/2024 - Added the mean population potential per pedestrian street
-- v1.0.1 on 7/31/2024 - Added a function (consolidate from cityseer) to remove close-by nodes
+- v1.0.3 on 9/02/2024 - Added a function de remove zero length edges in step 4
+- v1.0.2 on 8/27/2024 - Added the mean population potential per pedestrian street in step 4
+- v1.0.1 on 7/31/2024 - Added a function (consolidate from cityseer) to remove close-by nodes in step 4
 - v1.0.0 on 7/30/2024 - First version of the four-step procedure.
 
 # Project sections
@@ -68,7 +69,7 @@ _Output_
     * 'osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas
     * 'pedestrian_streets' (LineString), OSM pedestrian streets
 
-## STEP 2: RESIDENTIAL BUILDINGS CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
+## STEP 2: BUILDING CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
@@ -92,11 +93,10 @@ _Guide to run PPCA STEP 2_
 - Fill 0.1 box and run the script
 
 _Output_
-- PPCA_2-1_{Name}_IND_FL: Indicators and floors. A geopackage file with a single layer
-     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
-     Decision Tree Classifier
+- PPCA_2-1_{Name}_TYPE: Building types. A geopackage file with a single layer
+     * 'osm_buildings_res_type' (Polygon), osm buildings with building type filled by Decision Tree Classifier
 
-## STEP 3: MORPHOMETRY + FLOOR CLASSIFICATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
+## STEP 3: NUMBER OF FLOORS ESTIMATION [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
 
 _Description_
 
@@ -114,15 +114,14 @@ explores how the classifier's accuracy varies with different proportions of trai
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file PPCA_1-2_{Name}_retained.gpkg ('osm_non_populated_areas' (Polygon), OSM land use data with non-populated areas)
-- Output file PPCA_2-1_{Name}_IND_FL.gpkg ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing 
-number of floors filled by Decision Tree Classifier)
+- Output file PPCA_2-1_{Name}_TYPE.gpkg ('osm_buildings_res_type' (Polygon), osm buildings with building type filled by Decision Tree Classifier
 
 _Guide to run PPCA STEP 3_
 - Fill 0.1 box and run the script
 
 _Output_
 - PPCA_3-1_{Name}_IND_FL: Indicators and floors. A geopackage file with a single layer
-     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators and missing number of floors filled by 
+     * 'osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential classification and missing number of floors filled by 
      Decision Tree Classifier
  
 ## STEP 4: POPULATION POTENTIAL PER BUILDING & PER CATCHMENT AREA [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
@@ -131,18 +130,18 @@ _Description_
 
 This script estimates population distribution within residential buildings based on floor area. The script filters the buildings to retain
 only residential types. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each
-building with its respective population values. It then disaggregates the population estimates ('VALUE') based on these FA ratios to derive 
+building with its respective population values. It then disaggregates the population estimates ('VALUE') based on Floor-areas ratios (FA) to derive 
 a population estimation (Pop_estimation) for each building. This population estimation is then integrated into a pedestrian street network
 analysis (graph using cityseer). Points are generated along pedestrian streets at regular intervals, and the potential population is
-associated to these points within various catchment areas. The distance between the points to be generated along the network, as well as the
+associated to these points within various catchment areas (vector of distances). The distance between the points to be generated along the network, as well as the
 catchment area distances can be parameterized. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian 
 network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'. 
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
 - Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
-- Output file from PPCA 3-1_{Name}_TYPE ('osm_buildings_res_type' (Polygon), osm buildings with residential classification null filled by 
-Decision Tree Classifier)
+- Output file from PPCA 3-1_{Name}_FL_filled ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential
+classification and missing number of floors filled by Decision Tree Classifier
 
 
 _Guide to run PPCA STEP 4_
@@ -153,8 +152,8 @@ _Output_
     * 'osm_buildings_pop_estimate' (Points), centroid of osm residential and mixed-use buildings with population estimations
     * 'points_catchment_stats' (Points), points generated along the pedestrian streets with population potential for different catchment
 areas (sum, mean, maximum, minimum, variability)
-    * 'pedestrian_streets_avg_pop' (Lines), pedestrian streets streets with population potential (mean) for different catchment
-areas
+    * 'pedestrian_streets_avg_pop' (Lines), pedestrian streets with population potential (mean) for different catchment areas
+    * 'splited_street' (Lines), pedestrian streets splited at regular intervals
 
 # Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
