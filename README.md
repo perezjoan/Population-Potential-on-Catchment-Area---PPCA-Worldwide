@@ -138,14 +138,11 @@ _Output_
 
 _Description_
 
-This script estimates population distribution within residential buildings based on floor area. The script filters the buildings to retain
-only residential types. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each
-building with its respective population values. It then disaggregates the population estimates ('VALUE') based on Floor-areas ratios (FA) to derive 
-a population estimation (Pop_estimation) for each building. This population estimation is then integrated into a pedestrian street network
-analysis (graph using cityseer). Points are generated along pedestrian streets at regular intervals, and the potential population is
-associated to these points within various catchment areas (vector of distances). The distance between the points to be generated along the network, as well as the
-catchment area distances can be parameterized. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian 
-network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'. 
+This script estimates population distribution within residential and mixed-use buildings based on floor area. Using the centroids of these buildings, it conducts a spatial join with the GHS population data to associate each building with its respective population values. The population estimates ('VALUE') are disaggregated based on the ratio of each building's floor area ('FA') to the total floor area within the same GHS population grid cell. This results in a population estimation ('Pop_estimation') for each building.
+
+The population estimation is then integrated into a pedestrian street network analysis using cityseer. Points are generated at regular intervals along pedestrian streets, with an optional offset applied to the first point. The population potential is associated with these points within various catchment areas, which are parameterized by customizable distances. At the building level, the output variable of interest is 'Pop_estimation'. At the pedestrian network level, the output variable of interest is 'cc_Pop_estimation_sum_{catchment_area_distance}_nw'.
+
+An optional step allows filling null values for small street segments by averaging nearby segments' population data.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
