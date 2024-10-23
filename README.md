@@ -43,7 +43,7 @@ The script performs several filtering operations:
     - OSM streets are filtered to separate pedestrian and non-pedestrian streets by excluding streets with the following attributes: "motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link", "residential", "unclassified", "service", "busway", "cycleway", "living_street", and "track". Streets are also excluded if they are in tunnels (attribute "tunnel" = 'yes') or if their maxspeed is greater than or equal to 60 km/h (values 60, 70, 80, 90, 100). Pedestrian streets are retained by ensuring they do not match these attributes or speed conditions (Step 2.3).
     - OSM land use data is filtered to exclude non-populated areas by removing polygons with the following land use categories: "construction", "cemetery", "education", "healthcare", "industrial", "military", "railway", "religious", "port", and "winter_sports". Areas that do not fall under these land use categories are considered populated (Step 2.4).
 
-Several morphometric indicators are computed for buildings, such as:
+Morphometric indicators are computed for buildings, such as:
 
     - FL for the number of floors,
     - A for the surface area,
