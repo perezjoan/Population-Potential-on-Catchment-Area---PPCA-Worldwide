@@ -23,9 +23,9 @@ yMin = 47.9
 yMax = 48.5
 
 Versilia (Italia) - EPSG:6711
-xMin = 10.05
+xMin = 9.9
 xMax = 10.4
 yMin = 43.8
-yMax = 44.1
+yMax = 44.15
 
 Tool to define your bounding box : https://coordinates-converter.com/
