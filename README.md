@@ -83,17 +83,13 @@ _Output_
 
 _Description_
 
-This script creates a column 'type' within the OSM building data with three possible values (# 0 : Null ; 1: residential or mixed-use ; 2: 
-non-residential). Values are filled using the OSM attributes 'building_type' : apartments', 'barracks', 'house', 'residential', 'bungalow',
-'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house' & 'stilt_house' are considered as residential or mixed-use
-buildings. The classification is refined by attributing 0 values to Null values based on the spatial relationships with non-populated OSM 
-land use areas. Final score of classified buildings vs buldings with Null values are printed and mapped. This script then estimated the 
-Null values using the morphometric indicators calculated in PPCA STEP 1 using a Decision Tree Classifier. It splits the dataset into training
-and testing subsets based on a specified training ratio. It then trains the classifier using the training set and evaluates its accuracy on
-the test set. the trained model is used to predict the Null values for 'type'. Within the output, a new variable 'type_filled' is created 
-with two modalities (1 : residential or mixed-use ; 2 : non-residential). 'type_filled' takes the value of the OSM 'type' variable for non
-Null values, and the model prediction for Null values. The script also visualizes the decision tree, maps the results and examines how the
-classifier's accuracy varies with different proportions of training data, plotting the accuracy as a function of the training data size.
+This script creates a 'type' column within the OSM building data with three possible values (0: Null, 1: residential or mixed-use, 2: non-residential). The initial classification is based on the 'building' attribute in OSM, where buildings such as 'apartments', 'barracks', 'house', 'residential', 'bungalow', 'cabin', 'detached', 'dormitory', 'farm', 'static_caravan', 'semidetached_house', and 'stilt_house' are classified as residential or mixed-use (1).
+
+Next, the classification is refined through a spatial join with non-populated OSM land use areas. Buildings within non-populated areas are assigned as non-residential (2) if their 'type' is initially Null (0). The final classification statistics of buildings (classified vs Null) are printed and mapped.
+
+The script then estimates the remaining Null values for 'type' using a Decision Tree Classifier, trained on the morphometric indicators calculated in PPCA STEP 1 (e.g., area, perimeter, elongation, convexity). The data is split into training and testing subsets based on a specified training ratio, and the classifier's accuracy is evaluated on the test set. The trained model is then used to predict the Null 'type' values.
+
+The output includes a new variable 'type_filled', where non-null values from the original 'type' column are retained, and predicted values from the model are used to fill the previously Null entries. The script also visualizes the decision tree, maps the results, and explores how the classifier's accuracy varies with different training data sizes, plotting accuracy as a function of training size.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
