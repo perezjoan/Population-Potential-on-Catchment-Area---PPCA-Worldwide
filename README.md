@@ -106,16 +106,20 @@ _Output_
 
 _Description_
 
-This script begins by ensuring the columns 'height' and 'building:levels' are numeric, converting any non-numeric entries to Null. For residential
-buildings, the script then fills missing 'height' values by multiplying floors by 3, assuming an average floor height of 3 meters. Conversely, it 
-fills missing building values by dividing 'height' by 3 and rounding the result, again for residential buildings only. It calculates and prints the
-number and percentage of rows with Null in both 'height' and 'building. Using the morphometric indicators calculated in STEP 1, the script uses a 
-Decision Tree Classifier for evaluating the missing values for the number of floors per building ('FL'). The protocol then splits the data into 
-training and testing subsets based on a specified training ratio. The classifier is then trained on the training set and its accuracy is evaluated 
-on the test data set. Next, the trained model is used to predict missing 'FL' values (number of floors) in the OSM building data where 'FL' values
-are null. The output includes a new variable named 'FL_filled', which contains the original'FL' values for non-null entries and model predictions 
-for null entries. Floor-area ('FA') is corrected using the model. Additionally, the script visualizes the decision tree, maps the results, and 
-explores how the classifier's accuracy varies with different proportions of training data, plotting accuracy as a function of the training data size.
+This script processes OSM building data by focusing exclusively on residential or mixed-use buildings (type_filled = 1). It begins by ensuring that the 'height' and 'building
+' columns are numeric, converting any non-numeric entries to Null. For these residential buildings, missing 'height' values are filled by multiplying the number of floors ('building
+') by 3, assuming an average floor height of 3 meters. Conversely, missing 'building
+' values are filled by dividing the height by 3 and rounding the result.
+
+The script calculates and prints the number and percentage of rows where both 'height' and 'building
+' remain null. After renaming 'building
+' to 'FL' (floors), it recalculates the floor-area ('FA') by multiplying the number of floors ('FL') by the building footprint ('A').
+
+Next, the script applies a Decision Tree Classifier to predict missing 'FL' values using morphometric indicators (such as area, perimeter, elongation, and convexity) calculated in PPCA STEP 1. The data is split into training and testing sets based on a specified training ratio. The classifier is trained on the training set, and its accuracy is evaluated on the test set.
+
+The trained model is then applied to predict missing 'FL' values in the OSM building data. The output includes a new variable named 'FL_filled', which contains the original 'FL' values for non-null entries and model predictions for null entries. Since FA (floor-area) was calculated earlier in the script, it is now modified by correcting it with the newly predicted 'FL_filled' values.
+
+Additionally, the script visualizes the decision tree, evaluates the classifier's accuracy, and explores how accuracy varies with different proportions of training data.
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
