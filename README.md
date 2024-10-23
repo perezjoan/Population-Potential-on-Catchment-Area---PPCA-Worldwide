@@ -32,21 +32,30 @@ Follow these steps to run the Python algorithms on Windows:
 
 _Description:_
 
-This script facilitates the acquisition of OpenStreetMap (OSM) and Global Human Settlement (GHS) data using the Google Earth Engine and the
-osmnx library. It only requires the coordinates of a bounding box (WGS 84 decimal degrees). It starts by authenticating and initializing 
-Earth Engine in order to download Global Human Settlement (GHS) raster data for a specified year and for the defined geographical area 
-(bounding box). The GHS data is then saved on the cloud (google drive) as a raster image (1.1). The raster  image shall then manually be put in 
-the local working directory linked to this script. Then, the raster image is converted to vector data (1.2). The script proceeds to extract 
-building, street, and land use data within the same geographical area from OpenStreetMap (up to date). Data are cleaned by removing 
-list-type columns. Then, the script performs other important tasks: (2.1) filters out buildings with a footprint area less than 15 m², 
-underground buildings, and optionally filters out buildings that have no walls, if the 'wall' column exists. (2.2) It reads and filters 
-Global Human Settlement (GHS) data by rounding values and removing meshes with zero population (2.3) It filters OpenStreetMap (OSM) streets
-data to separate pedestrian and non-pedestrian streets based on the following attributes: "motorway|motorway_link|trunk|trunk_link|cycleway"
-(2.4) It filters OSM land use data to identify non-populated areas based on the following attributes:"construction|cemetery|education|
-healthcare|industrial|military|railway|religious|port|winter_sports". (3) Several new morphometric indicators are computed: 'FL' for the number of
-floors, 'A' for the surface area, 'P' for the perimeter, 'E' for elongation, 'C' for convexity, 'FA' for floor area, 'ECA' for a product involving
-elongation, convexity, and area, 'EA' for another elongation-area product, and 'SW' for shared walls ratio. Data are saved into two geopackages:
-cleaned raw data and retained features (Appendix 1). A report with maps and statistics can be produced (Appendix 2).
+This script facilitates the acquisition of OpenStreetMap (OSM) and Global Human Settlement (GHS) data using Google Earth Engine, the osmnx library, and QGIS for processing. It requires the coordinates of a bounding box (WGS 84 decimal degrees) to define the geographical area. The script starts by authenticating and initializing Earth Engine to download GHS raster data for a specified year and geographical area (bounding box). The GHS data is saved on the cloud (Google Drive) as a raster image (Step 1.1), which is then manually moved to the local working directory.
+
+Using QGIS, the raster image is converted to vector data (Step 1.2) via the pixelstopolygons algorithm and saved as a geopackage. The script proceeds to extract building, street, and land use data from OpenStreetMap (OSM) for the same area. It removes non-polygon geometries, cleans up columns (removing list-type columns), and keeps only essential attributes for buildings and streets.
+
+The script performs several filtering operations:
+
+    - Buildings are filtered based on a minimum footprint area of 15 m², removal of underground buildings, and optional filtering for buildings with no walls (Step 2.1).
+    - GHS data is filtered by rounding population values and removing meshes with zero population (Step 2.2).
+    - OSM streets are filtered to separate pedestrian and non-pedestrian streets based on attributes like "motorway", "trunk", and specific maxspeed values (Step 2.3).
+    - OSM land use data is filtered to identify non-populated areas based on land use attributes like "construction", "industrial", and "military" (Step 2.4).
+
+Several morphometric indicators are computed for buildings, such as:
+
+    - FL for the number of floors,
+    - A for the surface area,
+    - P for perimeter,
+    - E for elongation,
+    - C for convexity,
+    - FA for floor area,
+    - ECA for a product involving elongation, convexity, and area,
+    - EA for an elongation-area product, and
+    - SW for the shared walls ratio.
+
+Data are saved into two geopackages: cleaned raw data and retained features. The final output consists of filtered and cleaned vector data for GHS population, OSM buildings, streets, and land use areas. Optionally, a report with maps and statistics can be produced (Appendix 2).
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
