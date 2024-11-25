@@ -15,7 +15,7 @@ The protocol is designed for global application, requiring only the coordinates 
 # Installation Steps
 
 Follow these steps to run the Python algorithms on Windows:
-- Install the [Anaconda distribution of Python](https://www.anaconda.com/download)
+- Install the [Anaconda distribution of Python](https://www.anaconda.com/download) Anaconda3-2024.10-1-Windows-x86_64
 - Create a specific environment (detailed PPCA environment settings are provided [here](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt))
 - Activate the environment and run the related Python scripts
 
