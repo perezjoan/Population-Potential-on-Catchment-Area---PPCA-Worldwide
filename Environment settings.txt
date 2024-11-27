@@ -15,16 +15,13 @@ Environment settings for PPCA
 	conda install -c conda-forge qgis
 	conda install -c conda-forge momepy
 	conda install -c conda-forge reportlab
-
-4. Install Additional Packages using pip
-
 	pip install --upgrade cityseer
 
-5. Launch Jupyter Notebook
+4. Launch Jupyter Notebook
 
 	jupyter notebook
 
-6. In Jupyter Home, open and run the .ipynb scripts. Always remember to use this environment with 'conda activate PPCA'
+5. In Jupyter Home, open and run the .ipynb scripts. Always remember to use this environment with 'conda activate PPCA'
 
 --------------------------------
 
