@@ -20,6 +20,7 @@ Follow these steps to run the Python algorithms on Windows:
 - Activate the environment and run the related Python scripts
 
 # Releases
+- v1.0.5 on 11/27/2024 - Added Appendix A1 to perform slope calculation and clustering for catchment creas (on points) and changes on the street filter of STEP 1 (added 'primary link' to pedestrian streets, removed some maxspeed values (60, 70, 80)
 - v1.0.4 on 10/23/2024 - Added a function to fill small segments with NA average values in step 4
 - v1.0.3 on 9/02/2024 - Added a function to remove zero length edges in step 4
 - v1.0.2 on 8/27/2024 - Added the mean population potential per pedestrian street in step 4
@@ -40,7 +41,7 @@ The script performs several filtering operations:
 
     - Buildings are filtered based on a minimum footprint area of 15 m², removal of underground buildings, and optional filtering for buildings with no walls (Step 2.1).
     - GHS data is filtered by rounding population values and removing meshes with zero population (Step 2.2).
-    - OSM streets are filtered to separate pedestrian and non-pedestrian streets by excluding streets with the following attributes: "motorway", "motorway_link", "trunk", "trunk_link", "primary_link", "busway" and "cycleway". Streets are also excluded if they are in tunnels (attribute "tunnel" = 'yes') or if their maxspeed is greater than or equal to 60 km/h (values 60, 70, 80, 90, 100). Streets suitable for pedestrian use are then retained by ensuring they do not match these attributes or speed conditions (Step 2.3).
+    - OSM streets are filtered to separate pedestrian and non-pedestrian streets by excluding streets with the following attributes: "motorway", "motorway_link", "trunk", "trunk_link", "busway" and "cycleway". Streets are also excluded if they are in tunnels (attribute "tunnel" = 'yes') or if their maxspeed is greater than or equal to 90 km/h (values 90, 100). Streets suitable for pedestrian use are then retained by ensuring they do not match these attributes or speed conditions (Step 2.3).
     - OSM land use data is filtered to exclude non-populated areas by removing polygons with the following land use categories: "construction", "cemetery", "education", "healthcare", "industrial", "military", "railway", "religious", "port", and "winter_sports". Areas that do not fall under these land use categories are considered populated (Step 2.4).
 
 Morphometric indicators are computed for retained buildings:
@@ -146,10 +147,9 @@ An optional step allows filling null values for small street segments by averagi
 
 _Requirements_
 - The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
-- Output file from PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
-- Output file from PPCA 3-1_{Name}_FL_filled ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential
+- Output file PPCA_1-2_{Name}_retained ('ghs_populated_{Date}_vector'(Polygon),  GHS population data with non null values)
+- Output file PPCA 3-1_{Name}_FL_filled ('osm_buildings_FL_filled' (Polygon), osm buildings with morphometric indicators, residential
 classification and missing number of floors filled by Decision Tree Classifier
-
 
 _Guide to run PPCA STEP 4_
 - Fill 0.1 box and run the script
@@ -161,6 +161,23 @@ _Output_
 areas (sum, mean, maximum, minimum, variability)
     * 'pedestrian_streets_avg_pop' (Lines), pedestrian streets with population potential (mean) for different catchment areas
     * 'splited_street' (Lines), pedestrian streets splited at regular intervals
+
+## APPENDIX A1: SLOPE CALCULATION AND CLUSTERING FOR CATCHMENT AREAS [Link to code](https://github.com/perezjoan/PPCA-codes/tree/main/current%20release)
+
+_Description_
+
+This script processes population data calculated in STEP 4 of the PPCA protocol, focusing on analysis and clustering based on population estimates across four predefined catchment area distances. This script only works with four distances values (catchment areas calculated in STEP 4). Population values are log-transformed to ensure comparability across scales, and slopes between distances are computed for each observation. The script generates outputs to analyze population distributions and identify clusters with distinct profiles. The clustering workflow combines hierarchical clustering (to define initial cluster centers using a sample of 10,000 observations) and k-means clustering (to cluster the full dataset based on three slopes and the log-transformed population estimate at the second distance). The clustering results are validated using silhouette scores and visualized through feature curves representing the average population and slopes for each cluster. The output includes a geopackage file containing the processed dataset with slope values, clustering labels for solutions ranging from 5 to 19 clusters, and metadata for further analysis. Visualizations such as dendrograms, silhouette score plots, and feature curves allow users to interpret the clustering results and assess the distribution of population estimates across the study area.
+
+_Guide to run PPCA A1_
+- Fill 0.1 box and run the script
+
+_Requirements_
+- The PPCA environment on Python [Link to environment](https://github.com/perezjoan/PPCA-codes/blob/main/Environment%20settings.txt)
+- Output file PPCA_4-1_{Name}_POP_CAT ('Population and Catchment Areas'(Points))
+
+ _Output_
+- PPCA_A1_{Name}: A geopackage file with 1 layer
+    * 'Points_with_reg_and_hckmeans' (Points), points along the pedestrian street network with slope results accross four distances values and clustering labels for solutions ranging from 5 to 19 clusters
 
 # Acknowledgement 
 This resource was produced within the emc2 project, which is funded by ANR (France), FFG (Austria), MUR (Italy) and Vinnova (Sweden) under the Driving Urban Transition Partnership, which has been co-funded by the European Commission.
